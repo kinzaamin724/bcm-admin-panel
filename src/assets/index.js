@@ -1,0 +1,18 @@
+export const images = {
+  // logo: require("./home/image 1.png"),
+  logo: require("./home/image 1.png"),
+  sectionSideImg: require("./home/Group 1.png"),
+  sectionrightsideImg: require("./home/Group 2.png"),
+  topBoostImg: require("./home/edge-logo-6QY72KNE 2.png"),
+  avatorImg: require("./home/th (100) 1.png"),
+  icon1Home: require("./home/iconsHome/Icon.png"),
+  icon2Home: require("./home/iconsHome/Icon (1).png"),
+  icon3Home: require("./home/iconsHome/Icon (2).png"),
+  icon4Home: require("./home/iconsHome/Icon (3).png"),
+  icon5Home: require("./home/iconsHome/Icon (4).png"),
+  icon6Home: require("./home/iconsHome/warehouse.png"),
+  FeaturedBusiness: require("./home/Frame 7.png"),
+  phone: require("./home/phone.png"),
+  googleplay: require("./home/googleplay.svg"),
+  appstore: require("./home/appstore.svg"),
+};

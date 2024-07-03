@@ -1,0 +1,41 @@
+.Footers {
+  text-align: center;
+  height: 400px;
+  padding: 50px 0 100px 0px;
+  background: #0a0a0a;
+  color: #f1f1f1;;
+
+  h1 {
+    margin: 10px 0;
+    font-size: 24px;
+    color: #fff;
+    font-size: 40px;
+  }
+
+  .inner-icons {
+    width: 100px;
+    display: flex;
+    justify-content: space-around;
+    margin: 10px auto;
+  }
+
+  .footer-links {
+    margin-top: 20px;
+
+    p {
+      margin: 15px 0;
+      font-size: 20px;
+    
+    }
+
+    .footer-link {
+      text-decoration: none;
+      color: #f1f1f1;;
+      transition: color 0.3s;
+
+      &:hover {
+        color: #1890ff;
+      }
+    }
+  }
+}

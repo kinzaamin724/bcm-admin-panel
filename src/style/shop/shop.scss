@@ -1,0 +1,55 @@
+/* Shop.scss */
+
+.shop-container {
+  padding: 20px;
+}
+
+.shop-header {
+  padding: 20px 0;
+  background-color: #fff;
+  width: 75%;
+  margin: auto;
+  font-weight: 600;
+
+  .ant-breadcrumb {
+    margin-bottom: 0;
+    font-size: 16px;
+}
+
+.ant-breadcrumb-link {
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .shop-header-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .results-text {
+    margin-right: 20px;
+    font-size: 14px;
+  }
+
+  .ant-dropdown-link {
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 576px) {
+  .shop-header-right {
+    justify-content: center;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .results-text {
+    margin: 10px 0;
+  }
+}

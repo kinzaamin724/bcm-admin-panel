@@ -1,0 +1,91 @@
+.boost-section {
+  background: #020329;
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  padding-bottom: 10px;
+  //   text-align: center;
+  height: auto;
+  > h1 {
+    text-align: center;
+    font-size: 55px;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
+  }
+  > p {
+    text-align: center;
+    font-size: 23px;
+    font-weight: 400;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
+  }
+  .logo-img {
+    > img {
+     margin: auto !important;
+    }
+  }
+  .search-div {
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    .seavh-div-input {
+      width: 100% !important;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      background-color: hsla(0, 0%, 100%, .2) !important;
+      border-color: hsla(0, 0%, 100%, .09);
+      color: #fff;
+      border-radius: 30px !important;
+      font-size: 18px;
+      border: 1px solid transparent !important;
+      ::placeholder {
+        color: #fff;
+        opacity: 1; 
+      }
+    }
+    .ant-input {
+     
+      color: #fff;
+      border-radius: 30px !important;
+    }
+    .search-div .ant-input::placeholder {
+      color: white !important;
+      font-size: 25px !important;
+    }
+    .ant-btn {
+      background-color: #66d2e821 !important;
+    }
+  }
+
+
+  .sectionleftSideImg {
+    position: absolute;
+    right: 0px;
+    height: 75vh;
+    top: 0px;
+    > img {
+      height: 75vh;
+    }
+  }
+}
+.left-sidesection{
+  padding: 130px 50px 100px 150px;
+  width: 60vw;
+  justify-content: center;
+  justify-items: center;
+  text-align: center;
+  h1{
+    font-size: 25px;
+  }
+}
+
+.mobile{
+  padding: 40px 100px 100px 100px;
+  width: 40vw;
+  >img{
+    width: 200px;
+    margin-top: 10px;
+  }
+}
+
