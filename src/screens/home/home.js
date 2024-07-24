@@ -92,7 +92,7 @@ export default function Home() {
       <Table
         columns={columns}
         dataSource={data}
-        pagination={{ pageSize: 5 }}
+        pagination={{ pageSize: 8 }}
         scroll={{ x: 800 }}
       />
     </div>
