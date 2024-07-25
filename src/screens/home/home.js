@@ -1,13 +1,22 @@
 // src/components/Home.js
 import React from "react";
-import { Table, Button, Space } from "antd";
+import { Table, Button } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
-import "../../style/home/home.scss"
+import { useQuery } from "react-query";
+import axios from "axios";
+import "../../style/home/home.scss";
+
+const fetchUsers = async ({ queryKey }) => {
+  const [_, page, limit] = queryKey;
+  const response = await axios.get(`https://by-sim-backend.vercel.app/admin/user/all?page=${page}&limit=${limit}`);
+  return response.data;
+};
+
 const columns = [
   {
-    title: "Column 1",
-    dataIndex: "col1",
-    key: "col1",
+    title: "Email",
+    dataIndex: "email",
+    key: "email",
     align: "center",
   },
   {
@@ -62,36 +71,35 @@ const columns = [
   },
 ];
 
-const data = [
-  {
-    key: "1",
-    col1: "Data 1",
-    col2: "Data 2",
-    col3: "Data 3",
-    col4: "Data 4",
-    col5: "Data 5",
-    col6: "Data 6",
-    active: true,
-  },
-  {
-    key: "2",
-    col1: "Data A",
-    col2: "Data B",
-    col3: "Data C",
-    col4: "Data D",
-    col5: "Data E",
-    col6: "Data F",
-    active: false,
-  },
-];
-
 export default function Home() {
+  const { data, isLoading, isError, error } = useQuery(["users", 1, 10], fetchUsers);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    console.error("Error fetching data:", error);
+    return <div>Error fetching data: {error.message}</div>;
+  }
+
+  const userData = data?.users.map(user => ({
+    key: user.id,
+    email: user.email,
+    col2: user.col2, 
+    col3: user.col3, 
+    col4: user.col4, 
+    col5: user.col5, 
+    col6: user.col6, 
+    active: user.active,
+  }));
+
   return (
     <div style={{ padding: "20px" }}>
-      <h1 style={{ textAlign: "center" }}>Home</h1>
+      <h1 style={{ textAlign: "center" }}>Users</h1>
       <Table
         columns={columns}
-        dataSource={data}
+        dataSource={userData}
         pagination={{ pageSize: 8 }}
         scroll={{ x: 800 }}
       />
