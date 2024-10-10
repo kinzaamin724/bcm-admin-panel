@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Layout, theme } from 'antd';
 import Sidebar from './sidebar/Sidebar';
 import CustomHeader from './header/CustomHeader';
-import CustomFooter from './footer/CustomFooter';
+// import CustomFooter from './footer/CustomFooter';
 
 const { Content } = Layout;
 
@@ -20,19 +20,15 @@ const CustomLayout = ({ children }) => {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 768) {
-        setCollapsed(true); // Close sidebar on mobile devices
+        setCollapsed(true); 
       } else {
-        setCollapsed(false); // Open sidebar on other devices
+        setCollapsed(false); 
       }
     };
-
-    // Set initial state based on current width
     handleResize();
-
-    // Add event listener for resize
     window.addEventListener('resize', handleResize);
 
-    // Clean up the event listener on component unmount
+  
     return () => {
       window.removeEventListener('resize', handleResize);
     };
@@ -40,7 +36,7 @@ const CustomLayout = ({ children }) => {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Sidebar collapsed={collapsed} />
+      <Sidebar className="h-[100vh] fixed" collapsed={collapsed} />
       <Layout className="site-layout">
         <CustomHeader collapsed={collapsed} toggle={toggle} />
         <Content
@@ -54,8 +50,7 @@ const CustomLayout = ({ children }) => {
         >
           {children}
         </Content>
-        {/* <CustomFooter /> */}
-      </Layout>
+        </Layout>
     </Layout>
   );
 };

@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* 
+// html,
+// body {
+//   margin: 0;
+//   padding: 0;
+//   box-sizing: border-box;
+//   height: 100%;
+//   width: 100%;
+// }
+// // varbackground: #15243a;
+
+// :root {
+//   /* --primaryColor:#222967; */
+/* 
+//   --primaryColor: #15243a;
+//   --form_bg_color: white;
+//   --color-dark: #252525;
+//   --color-white: #ffffff;
+//   --color-gray: #d9d9d9;
+//   --color-blue-dark: #363070;
+//   --color-green: #5baa8b;
+//   --color-mehndi: #ceb745;
+//   --color-green-light: #8cc6c7;
+//   --color-pink: #e59a94;
+//   --color-pink-light: #efe3e3;
+//   --color-medium-pink: #f3b5c0;
+//   --color-dark-orange: #d08e2c;
+//   --color-dark-yellow: #e1a63c;
+//   --color-blue: #295ef5;
+//   --color-deep-orange: #ea6a45;
+//   --color-icon: #959595;
+//   --bg-quote-color: #f8f8f8;
+//   --bg-uploads: #f3f6ff;
+// }
+// @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+// body {
+//   font-family: 'Roboto', sans-serif;
+// }
+// // font-family: "Manrope", sans-serif;
+
+// .ant-layout-footer {
+//   padding: 0%;
+// }
+// .ant-card {
+//   background-color: transparent !important;
+//   border: 1px solid transparent !important;
+// }
+
+
+
+// :where(.css-dev-only-do-not-override-1r287do).ant-layout {
+//   // background-color: #fff;
+//   font-family:  Roboto,  'sans-serif';
+//   padding:0px
+// } */
+ 

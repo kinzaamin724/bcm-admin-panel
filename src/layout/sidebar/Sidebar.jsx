@@ -1,12 +1,11 @@
-// src/components/Sidebar.js
 import React from "react";
+
 import { Layout, Menu } from "antd";
-import {
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-} from "@ant-design/icons";
 import Logo from "../../assets/home/splashlogo.png";
+
+import { UserOutlined,VideoCameraOutlined,UploadOutlined} from "@ant-design/icons";
+
+
 const { Sider } = Layout;
 
 const Sidebar = ({ collapsed }) => {
@@ -15,25 +14,17 @@ const Sidebar = ({ collapsed }) => {
       trigger={null}
       collapsible
       collapsed={collapsed}
-      style={{ background: "#" }}
     >
       <div className="demo-logo-vertical" />
       <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          margin: "10px 0 30px 0",
-          color: "#FFFFFF",
-        }}
+      className={"flex , justify-center items-center  text-white mt-6 mb-5"}
+       
       >
         <img
           src={Logo}
           alt=""
-          style={{
-            width: "50px",
-            height: "80px",
-          }}
+          className="w-[50px] h-[80px]"
+         
         />
       </div>
 
@@ -45,7 +36,7 @@ const Sidebar = ({ collapsed }) => {
           {
             key: "1",
             icon: <UserOutlined />,
-            label: "nav 1",
+            label: "User Management",
           },
           {
             key: "2",
