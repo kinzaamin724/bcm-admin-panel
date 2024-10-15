@@ -41,12 +41,12 @@ const Sidebar = ({ collapsed }) => {
           {
             key: "2",
             icon: <VideoCameraOutlined />,
-            label: "nav 2",
+            label: "Pricing Management ",
           },
           {
             key: "3",
             icon: <UploadOutlined />,
-            label: "nav 3",
+            label:  "Subscription management",
           },
         ]}
       />
