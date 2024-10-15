@@ -1,5 +1,5 @@
 import { DeleteOutlined } from '@ant-design/icons';
-import { Avatar, Button, Table, Typography } from 'antd';
+import { Avatar, Button, message, Popconfirm, Table, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -12,11 +12,17 @@ const Home = () => {
       dataIndex: "profileImage",
       key: "profileImage",
       align: "center",
-      render: (image) => (
-        <Avatar  classNam="" src={image}> </Avatar>
-        
-      ),
-    },
+      render: (image, record) => {
+        const email = record.email || "";
+        const initials = email.substring(0, 2).toUpperCase();
+  
+        return (
+          <Avatar src={image} alt="Profile Image" >
+            {!image ? initials : null}
+          </Avatar>
+        );
+      },
+    },,
     {
       title: "Email",
       dataIndex: "email",
@@ -50,37 +56,70 @@ const Home = () => {
       key: "action",
       align: "center",
       render: (_, record) => (
-        <Button
-          icon={<DeleteOutlined style={{color:"red"}} />}
-          onClick={() => handleDelete(record._id)}
+        <Popconfirm
+          title="Are you sure to delete this user?"
+          onConfirm={() => handleDelete(record._id)} 
+          onCancel={() => message.info('User deletion canceled')}
+          okText="Yes"
+          cancelText="No"
         >
-        </Button>
+          <Button
+            icon={<DeleteOutlined style={{ color: "red" }} />}
+            style={{ border: 'none' }}
+          />
+        </Popconfirm>
       ),
-    },
+    }
+    
   ];
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          'https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/all?page=5&limit=5&highlightedUserId=6666a9fbf494405b3407899e'
-        );
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        'https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/all?page=5&limit=5&highlightedUserId=6666a9fbf494405b3407899e'
+      );
+      setData(response.data.users);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
-        const users = response.data.users;
-        // console.log(users, "===========");
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         'https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/all?page=5&limit=5&highlightedUserId=6666a9fbf494405b3407899e'
+  //       );
+
+  //       const users = response.data.users;
+  //       // console.log(users, "===========");
         
-        setData(users);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
+  //       setData(users);
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     }
+  //   };
 
+  //   fetchData();
+  // }, []);
+
+  const handleDelete = async (userId) => {
+    try {
+      await axios.delete(
+        `https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/deleteUser?userId=${userId}`
+      );
+      message.success('User deleted successfully');
+      fetchData();
+    } catch (error) {
+      message.error('Failed to delete user');
+      console.error('Error deleting user:', error);
+    }
+  };
+
+  useEffect(() => {
     fetchData();
   }, []);
 
-  const handleDelete = (id) => {
-    console.log(`Delete user with id: ${id}`);
-  };
 
   return (
     <div>
@@ -89,7 +128,6 @@ const Home = () => {
         columns={columns}
         dataSource={data}
         rowKey="_id" 
-        pagination={{ pageSize: 8 }}
         scroll={{ x: 800 }}
       />
     </div>
