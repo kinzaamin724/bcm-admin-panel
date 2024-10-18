@@ -1,31 +1,38 @@
-
-
-    .profile {
-      position: absolute;
-      right: 20px;
-      .profile-desc {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        column-gap: 5px;
-        img {
-          width: 39px;
-          height: 39px;
-        }
-        p {
-          margin: 0px;
-          font-size: 16px;
-        }
-        .icon {
-          font-size: 25px;
-          cursor: pointer;
-          margin-left: 20px;
-          transition: all 0.5s ease-in;
-          &:hover {
-            transform: scale(1.2);
-          }
-        }
-      }
-      
+.profile {
+  position: absolute;
+  right: 20px;
+  .profile-desc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5px;
+    img {
+      width: 39px;
+      height: 39px;
     }
-    
+    p {
+      margin: 0px;
+      font-size: 16px;
+    }
+    .icon {
+      font-size: 25px;
+      cursor: pointer;
+      margin-left: 20px;
+      transition: all 0.5s ease-in;
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+}
+
+.ant-menu-item-selected {
+  background-color: transparent !important;
+  color: unset !important;
+}
+
+.ant-menu-item {
+  &:has(.active-link) {
+    background-color: #1677ff !important;
+  }
+}

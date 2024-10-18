@@ -1,7 +1,6 @@
 import CustomLayout from "../layout/CustomLayouts";
 import LazyComponent from "./LazyComponent";
 
-
 export const SiteMap = {
   home: {
     title: "home",
@@ -32,5 +31,15 @@ export const SiteMap = {
       </CustomLayout>
     ),
     description: "Shop-Page",
+  },
+  countries: {
+    title: "country management",
+    path: "/countries",
+    element: (
+      <CustomLayout>
+        <LazyComponent path="countries/countries" />
+      </CustomLayout>
+    ),
+    description: "Countries Management",
   },
 };
