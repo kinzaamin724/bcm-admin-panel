@@ -36,11 +36,18 @@ const CustomLayout = ({ children }) => {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Sidebar className="h-[100vh] fixed" collapsed={collapsed} />
+      <Sidebar className="h-[100vh] fixed" collapsed={collapsed} style={{
+          position: 'fixed',
+          height: '100vh',
+          left: 0,
+          top: 0,
+          zIndex: 10,
+        }}/>
       <Layout className="site-layout">
         <CustomHeader collapsed={collapsed} toggle={toggle} />
         <Content
           style={{
+            
             margin: '24px 16px',
             padding: 24,
             minHeight: 280,

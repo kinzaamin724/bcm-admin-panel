@@ -33,11 +33,21 @@ export const SiteMap = {
     description: "Shop-Page",
   },
   countries: {
-    title: "country management",
+    title: "country management",                          
     path: "/countries",
     element: (
       <CustomLayout>
         <LazyComponent path="countries/countries" />
+      </CustomLayout>
+    ),
+    description: "Countries Management",
+  },
+  pricing: {
+    title: "pricing management",                          
+    path: "/pricing",
+    element: (
+      <CustomLayout>
+        <LazyComponent path="pricing/pricing" />
       </CustomLayout>
     ),
     description: "Countries Management",

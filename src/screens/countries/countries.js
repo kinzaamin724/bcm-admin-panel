@@ -1,9 +1,10 @@
+
 import { message, Switch, Table, Typography } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 function Countries() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({ countries: [], totalRecords: 0 });
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [loading, setLoading] = useState(false);
@@ -15,7 +16,11 @@ function Countries() {
         `https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/getCountries`
       );
 
-      setData(response.data);
+      // Set the countries and total records
+      setData({
+        countries: response.data.countries,
+        totalRecords: response.data.totalRecords,
+      });
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
@@ -61,12 +66,16 @@ function Countries() {
       key: "flag",
       align: "center",
       render: (_, record) => (
-        <img
-          src={`https://flagsapi.com/${record.iso}/shiny/64.png`}
-          alt={record.iso}
-        />
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <img
+            src={`https://flagsapi.com/${record.iso}/shiny/64.png`}
+            alt={record.iso}
+           
+          />
+        </div>
       ),
-    },
+    }
+,    
 
     {
       title: "ISO",
@@ -76,7 +85,7 @@ function Countries() {
     },
 
     {
-      title: "Active",
+      title: "Status",
       key: "active",
       align: "center",
       render: (_, record) => (
@@ -96,13 +105,13 @@ function Countries() {
       <Table
         loading={loading}
         columns={columns}
-        dataSource={data.country}
+        dataSource={data.countries}
         rowKey="_id"
         scroll={{ x: 800 }}
         pagination={{
           current: currentPage,
           pageSize: pageSize,
-          total: data.total,
+          total: data.totalRecords,
           onChange: (page, pageSize) => {
             setCurrentPage(page);
             setPageSize(pageSize);
