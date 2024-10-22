@@ -301,9 +301,9 @@ const ProfitInput = () => {
                 profit: "0%", // Default profit if no data found
               }));
               setCustomProfitRanges(initialRanges);
-              message.warning(
-                `No data found for the selected country: ${selectedCountry}.`
-              );
+              // message.warning(
+              //   `No data found for the selected country: ${selectedCountry}.`
+              // );
             }
           } else {
             setCustomProfitRanges([]); // Reset the profit ranges on failure
