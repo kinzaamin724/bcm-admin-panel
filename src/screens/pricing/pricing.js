@@ -1,322 +1,6 @@
-
-// import React, { useState, useEffect } from 'react';
-// import { Select, Table, Input, Typography, Button, Row, Col } from 'antd';
-// import { getData } from 'country-list';
-// import 'antd/dist/reset.css'; // Import Ant Design styles
-
-// const { Option } = Select;
-// const { Title } = Typography;
-
-// const allCountries = getData();
-
-
-// const generateRanges = (rangeSize, maxRange, defaultProfit) => {
-//   const ranges = [];
-//   for (let i = 1; i <= maxRange; i += rangeSize) {
-//     const endRange = Math.min(i + rangeSize - 1, maxRange);
-//     ranges.push({
-//       key: `${i}-${endRange}`,
-//       range: `${i}-${endRange}`,
-//       profit: defaultProfit + '%',
-//     });
-//   }
-//   return ranges;
-// };
-
-// const defaultProfit = 50; 
-// const maxRange = 300; 
-// const rangeSize = 10; 
-
-// const ProfitInput = () => {
-//   const [selectedCountry, setSelectedCountry] = useState('');
-//   const [customProfitRanges, setCustomProfitRanges] = useState({});
-
-  
-//   useEffect(() => {
-//     if (selectedCountry) {
-//       const generatedRanges = generateRanges(rangeSize, maxRange, defaultProfit);
-//       setCustomProfitRanges((prevRanges) => ({
-//         ...prevRanges,
-//         [selectedCountry]: generatedRanges,
-//       }));
-//     }
-//   }, [selectedCountry]);
-
-//   const handleCountryChange = (value) => {
-//     setSelectedCountry(value);
-//   };
-
-//   const handleProfitChange = (rangeKey, value) => {
-   
-//     const updatedRanges = customProfitRanges[selectedCountry]?.map((range) =>
-//       range.key === rangeKey ? { ...range, profit: value + '%' } : range
-//     );
-
-//     setCustomProfitRanges({
-//       ...customProfitRanges,
-//       [selectedCountry]: updatedRanges,
-//     });
-//   };
-
-
-//   const handleSave = () => {
-//     console.log('Profit data saved:', customProfitRanges[selectedCountry]);
-   
-//   };
-
-
-//   const columns = [
-//     {
-//       title: 'Range (Units)',
-//       dataIndex: 'range',
-//       key: 'range',
-//       width:'50%',
-//     },
-//     {
-//       title: 'Profit (%)',
-//       dataIndex: 'profit',
-//       key: 'profit',
-//       width:'50%',
-//       render: (text, record) => (
-//         <Input
-//           type="number"
-//           value={text.replace('%', '')}
-//           onChange={(e) => handleProfitChange(record.key, e.target.value)}
-//           suffix="%"
-//         />
-//       ),
-//     },
-//   ];
-
-//   return (
-//     <div style={{ padding: '20px', maxWidth: '800px', margin: 'auto' }}>
-     
-//       <Row justify="space-between" align="middle">
-//         <Col span={18}>
-//           <Title level={2}>Select Country to Set Profit Ranges</Title>
-//         </Col>
-//         <Col span={6} style={{ textAlign: 'right' }}>
-//           <Button type="primary" onClick={handleSave}>
-//             Save
-//           </Button>
-//         </Col>
-//       </Row>
-
-//       <Select
-//         showSearch
-//         style={{ width: '65%', marginBottom: '20px' }}
-//         placeholder="Select a Country"
-//         optionFilterProp="children"
-//         onChange={handleCountryChange}
-//         filterOption={(input, option) =>
-//           option.children.toLowerCase().includes(input.toLowerCase())
-//         }
-//       >
-//         {allCountries.map((country) => (
-//           <Option key={country.code} value={country.code}>
-//             {country.name}
-//           </Option>
-//         ))}
-//       </Select>
-
- 
-//       {selectedCountry && (
-//         <div>
-//           <Row justify="space-between" align="middle">
-//             <Col span={20}>
-//               <Title level={4}>
-//                 Profit Ranges for{' '}
-//                 {allCountries.find((c) => c.code === selectedCountry).name}
-//               </Title>
-//             </Col>
-            
-//           </Row>
-//           <Table
-//            style={{ width: '65%', marginBottom: '20px' }}
-//             columns={columns}
-//             dataSource={customProfitRanges[selectedCountry] || []}
-//             pagination={false}
-//             bordered
-//           />
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default ProfitInput;
-
-
-
-// import React, { useState, useEffect } from 'react';
-// import { Select, Table, Input, Typography, Button, Row, Col } from 'antd';
-// import { getData } from 'country-list';
-// import axios from 'axios';
-
-// const { Option } = Select;
-// const { Title } = Typography;
-
-// const generateRanges = (rangeSize, maxRange, defaultProfit) => {
-//   const ranges = [];
-//   for (let i = 1; i <= maxRange; i += rangeSize) {
-//     const endRange = Math.min(i + rangeSize - 1, maxRange);
-//     ranges.push({
-//       key: `${i}-${endRange}`,
-//       range: `${i}-${endRange}`,
-//       profit: defaultProfit + '%',
-//     });
-//   }
-//   return ranges;
-// };
-
-// const defaultProfit = 50;
-// const maxRange = 300;
-// const rangeSize = 10;
-
-// const ProfitInput = () => {
-//   const [selectedCountry, setSelectedCountry] = useState('');
-//   const [customProfitRanges, setCustomProfitRanges] = useState({});
-//   const [countries, setCountries] = useState([]);
-
-//   // Fetch countries from API
-//   useEffect(() => {
-//     const fetchCountries = async () => {
-//       try {
-//         const response = await axios.get('https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/getCountries');
-//         // Format countries data if necessary
-//         setCountries(response.data.countries.map((country) => ({
-//           code: country.iso,
-//           name: country.name,
-//         })));
-//       } catch (error) {
-//         console.error('Failed to fetch countries', error);
-//       }
-//     };
-//     fetchCountries();
-//   }, []);
-
-//   // Fetch profit ranges for selected country
-//   useEffect(() => {
-//     const fetchProfitRanges = async () => {
-//       if (selectedCountry) {
-//         try {
-//           const response = await axios.get(`https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/getAllProfits?country=${selectedCountry}`);
-//           setCustomProfitRanges((prevRanges) => ({
-//             ...prevRanges,
-//             [selectedCountry]: response.data || generateRanges(rangeSize, maxRange, defaultProfit),
-//           }));
-//         } catch (error) {
-//           console.error('Failed to fetch profit ranges', error);
-//         }
-//       }
-//     };
-//     fetchProfitRanges();
-//   }, [selectedCountry]);
-
-//   const handleCountryChange = (value) => {
-//     setSelectedCountry(value);
-//   };
-
-//   const handleProfitChange = (rangeKey, value) => {
-//     const updatedRanges = customProfitRanges[selectedCountry]?.map((range) =>
-//       range.key === rangeKey ? { ...range, profit: value + '%' } : range
-//     );
-
-//     setCustomProfitRanges({
-//       ...customProfitRanges,
-//       [selectedCountry]: updatedRanges,
-//     });
-//   };
-
-//   const handleSave = async () => {
-//     try {
-//       await axios.post('https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/createProfitForCountry', {
-//         country: selectedCountry,
-//         profitRanges: customProfitRanges[selectedCountry],
-//       });
-//       console.log('Profit data saved successfully!');
-//     } catch (error) {
-//       console.error('Failed to save profit data', error);
-//     }
-//   };
-
-//   const columns = [
-//     {
-//       title: 'Range (Units)',
-//       dataIndex: 'range',
-//       key: 'range',
-//       width: '50%',
-//     },
-//     {
-//       title: 'Profit (%)',
-//       dataIndex: 'profit',
-//       key: 'profit',
-//       width: '50%',
-//       render: (text, record) => (
-//         <Input
-//           type="number"
-//           value={text.replace('%', '')}
-//           onChange={(e) => handleProfitChange(record.key, e.target.value)}
-//           suffix="%"
-//         />
-//       ),
-//     },
-//   ];
-
-//   return (
-//     <div style={{ padding: '20px', maxWidth: '800px', margin: 'auto' }}>
-//       <Row justify="space-between" align="middle">
-//         <Col span={18}>
-//           <Title level={2}>Select Country to Set Profit Ranges</Title>
-//         </Col>
-//       </Row>
-
-//       <Select
-//         showSearch
-//         style={{ width: '100%', marginBottom: '20px' }}
-//         placeholder="Select a Country"
-//         optionFilterProp="children"
-//         onChange={handleCountryChange}
-//         filterOption={(input, option) =>
-//           option.children.toLowerCase().includes(input.toLowerCase())
-//         }
-//       >
-//         {countries.map((country) => (
-//           <Option key={country.code} value={country.code}>
-//             {country.name}
-//           </Option>
-//         ))}
-//       </Select>
-
-//       {selectedCountry && (
-//         <div>
-//           <Title level={4}>
-//             Profit Ranges for{' '}
-//             {countries.find((c) => c.code === selectedCountry)?.name}
-//           </Title>
-//           <Table
-//   columns={columns}
-//   dataSource={Array.isArray(customProfitRanges[selectedCountry]) ? customProfitRanges[selectedCountry] : []}
-//   pagination={false}
-//   bordered
-// />
-
-//           <Button type="primary" onClick={handleSave} style={{ marginTop: '20px' }}>
-//             Save Profit Ranges
-//           </Button>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default ProfitInput;
-
-
-
 // import React, { useState, useEffect } from 'react';
 // import { Select, Table, Input, Typography, Button, Row, Col, message } from 'antd';
-// import 'antd/dist/reset.css'; // Import Ant Design styles
+// import 'antd/dist/reset.css';
 
 // const { Option } = Select;
 // const { Title } = Typography;
@@ -324,13 +8,12 @@
 // const ProfitInput = () => {
 //   const [countries, setCountries] = useState([]);
 //   const [selectedCountry, setSelectedCountry] = useState('');
-//   const [customProfitRanges, setCustomProfitRanges] = useState({});
-  
-//   // Fetch countries from the API
+//   const [customProfitRanges, setCustomProfitRanges] = useState([]);
+
 //   useEffect(() => {
 //     const fetchCountries = async () => {
 //       try {
-//         const response = await fetch('https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/getCountries');
+//         const response = await fetch('https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/getCountries?data=web');
 //         const data = await response.json();
 //         if (data.success) {
 //           setCountries(data.countries);
@@ -344,70 +27,95 @@
 //     fetchCountries();
 //   }, []);
 
-
-// useEffect(() => {
+//   useEffect(() => {
 //     if (selectedCountry) {
 //       const fetchProfitRanges = async () => {
 //         try {
 //           const response = await fetch('https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/getAllProfits');
 //           const data = await response.json();
-          
+
 //           if (data.success) {
-//             const countryProfitData = data.data.find(item => item.countryId.iso === selectedCountry);
-            
+//             const countryProfitData = data.data.find(item =>
+//               item.countryId && item.countryId.iso === selectedCountry
+//             );
+
 //             if (countryProfitData) {
-            
 //               if (countryProfitData.ranges && countryProfitData.ranges.length > 0) {
 //                 const generatedRanges = countryProfitData.ranges.map((range, index) => ({
 //                   key: `${range}-${index}`,
 //                   range: range,
 //                   profit: `${countryProfitData.profit}%`
 //                 }));
-                
-//                 setCustomProfitRanges((prevRanges) => ({
-//                   ...prevRanges,
-//                   [selectedCountry]: generatedRanges,
-//                 }));
+
+//                 setCustomProfitRanges(generatedRanges);
 //               } else {
-          
-//                 setCustomProfitRanges((prevRanges) => ({
-//                   ...prevRanges,
-//                   [selectedCountry]: [], 
-//                 }));
+//                 setCustomProfitRanges([]);
 //                 message.warning(`No profit ranges available for ${selectedCountry}.`);
 //               }
 //             } else {
+//               setCustomProfitRanges([]);
 //               message.warning(`No data found for the selected country: ${selectedCountry}.`);
 //             }
 //           } else {
+//             setCustomProfitRanges([]); // Reset the profit ranges on failure
 //             message.error('Failed to load profit data.');
 //           }
 //         } catch (error) {
+//           setCustomProfitRanges([]); // Reset the profit ranges on error
 //           message.error('Error fetching profit data: ' + error.message);
 //         }
 //       };
 //       fetchProfitRanges();
+//     } else {
+//       setCustomProfitRanges([]); // Reset the profit ranges if no country is selected
 //     }
 //   }, [selectedCountry]);
-  
 
 //   const handleCountryChange = (value) => {
 //     setSelectedCountry(value);
 //   };
 
 //   const handleProfitChange = (rangeKey, value) => {
-//     const updatedRanges = customProfitRanges[selectedCountry]?.map((range) =>
+//     const updatedRanges = customProfitRanges.map((range) =>
 //       range.key === rangeKey ? { ...range, profit: value + '%' } : range
 //     );
-//     setCustomProfitRanges({
-//       ...customProfitRanges,
-//       [selectedCountry]: updatedRanges,
-//     });
+//     setCustomProfitRanges(updatedRanges);
 //   };
 
 //   const handleSave = () => {
-//     console.log('Profit data saved:', customProfitRanges[selectedCountry]);
+//     console.log('Profit data saved:', customProfitRanges);
 //     message.success('Profit data saved successfully.');
+//   };
+
+//   const handleCreateProfit = async () => {
+//     const profitData = {
+//         countryId: { iso: selectedCountry },
+//       ranges: customProfitRanges.map(range => range.range), // Collect the ranges to send
+//       profit: customProfitRanges.length > 0 ? customProfitRanges[0].profit.replace('%', '') : '0' // Use a default profit value if none are set
+
+//     };
+//     console.log("profit show", profitData)
+//     try {
+//       const response = await fetch('https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/createProfitForCountry', {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(profitData),
+//       });
+
+//       const data = await response.json();
+//       console.log("Server response:", data);
+//       if (data.success) {
+//         message.success(data.message);
+//         setCustomProfitRanges([]); // Clear the ranges after successful submission
+//       } else {
+//         message.error('Failed to create profit data.');
+//       }
+//     } catch (error) {
+//       message.error('Error creating profit data: ' + error.message);
+//     }
+
 //   };
 
 //   const columns = [
@@ -440,7 +148,7 @@
 //           <Title level={2}>Select Country to Set Profit Ranges</Title>
 //         </Col>
 //         <Col span={6} style={{ textAlign: 'right' }}>
-//           <Button type="primary" onClick={handleSave}>
+//           <Button type="primary" onClick={handleCreateProfit}>
 //             Save
 //           </Button>
 //         </Col>
@@ -476,7 +184,7 @@
 //           <Table
 //             style={{ width: '65%', marginBottom: '20px' }}
 //             columns={columns}
-//             dataSource={customProfitRanges[selectedCountry] || []}
+//             dataSource={customProfitRanges}
 //             pagination={false}
 //             bordered
 //           />
@@ -487,185 +195,243 @@
 // };
 
 // export default ProfitInput;
-import React, { useState, useEffect } from 'react';
-import { Select, Table, Input, Typography, Button, Row, Col, message } from 'antd';
-import 'antd/dist/reset.css'; // Import Ant Design styles
+import React, { useState, useEffect } from "react";
+import {
+  Select,
+  Table,
+  Input,
+  Typography,
+  Button,
+  Row,
+  Col,
+  message,
+} from "antd";
+import "antd/dist/reset.css";
 
 const { Option } = Select;
 const { Title } = Typography;
 
 const ProfitInput = () => {
   const [countries, setCountries] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState('');
+  const [selectedCountry, setSelectedCountry] = useState("");
   const [customProfitRanges, setCustomProfitRanges] = useState([]);
+  const [selectedCountryId, setSelectedCountryId] = useState("");
 
-  // Fetch countries from the API
+  const staticRanges = [
+    "0-9",
+    "10-19",
+    "20-29",
+    "30-39",
+    "40-49",
+    "50-59",
+    "60-69",
+    "70-79",
+    "80-89",
+    "90-99",
+    "100-109",
+    "110-119",
+    "120-129",
+    "130-139",
+    "140-149",
+    "150-159",
+    "160-169",
+    "170-179",
+    "180-189",
+    "190-199",
+    "200-209",
+    "210-219",
+    "220-229",
+    "230-239",
+    "240-249",
+    "250-259",
+    "260-269",
+    "270-279",
+    "280-289",
+    "290-300",
+  ];
+
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const response = await fetch('https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/getCountries');
+        const response = await fetch(
+          "https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/getCountries?data=web"
+        );
         const data = await response.json();
+        // console.log("data ->", data)
         if (data.success) {
           setCountries(data.countries);
         } else {
-          message.error('Failed to load countries.');
+          message.error("Failed to load countries.");
         }
       } catch (error) {
-        message.error('Error fetching countries.');
+        message.error("Error fetching countries.");
       }
     };
     fetchCountries();
   }, []);
 
-//   useEffect(() => {
-//     if (selectedCountry) {
-//       const fetchProfitRanges = async () => {
-//         try {
-//           const response = await fetch('https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/getAllProfits');
-//           const data = await response.json();
-
-//           if (data.success) {
-//             const countryProfitData = data.data.find(item => item.countryId.iso === selectedCountry);
-
-//             if (countryProfitData) {
-//               if (countryProfitData.ranges && countryProfitData.ranges.length > 0) {
-//                 const generatedRanges = countryProfitData.ranges.map((range, index) => ({
-//                   key: `${range}-${index}`,
-//                   range: range,
-//                   profit: `${countryProfitData.profit}%`
-//                 }));
-
-//                 setCustomProfitRanges(generatedRanges);
-//               } else {
-//                 setCustomProfitRanges([]);
-//                 message.warning(`No profit ranges available for ${selectedCountry}.`);
-//               }
-//             } else {
-//               message.warning(`No data found for the selected country: ${selectedCountry}.`);
-//             }
-//           } else {
-//             message.error('Failed to load profit data.');
-//           }
-//         } catch (error) {
-//           message.error('Error fetching profit data: ' + error.message);
-//         }
-//       };
-//       fetchProfitRanges();
-//     }
-//   }, [selectedCountry]);
-useEffect(() => {
+  useEffect(() => {
     if (selectedCountry) {
       const fetchProfitRanges = async () => {
         try {
-          const response = await fetch('https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/getAllProfits');
+          const response = await fetch(
+            "https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/getAllProfits"
+          );
           const data = await response.json();
-  
+
           if (data.success) {
-            const countryProfitData = data.data.find(item => 
-              item.countryId && item.countryId.iso === selectedCountry // Ensure countryId exists
+            const countryProfitData = data.data.find(
+              (item) => item.countryId && item.countryId.iso === selectedCountry
             );
-  
+
             if (countryProfitData) {
-              if (countryProfitData.ranges && countryProfitData.ranges.length > 0) {
-                const generatedRanges = countryProfitData.ranges.map((range, index) => ({
-                  key: `${range}-${index}`,
-                  range: range,
-                  profit: `${countryProfitData.profit}%`
-                }));
-  
-                setCustomProfitRanges(generatedRanges);
-              } else {
-                setCustomProfitRanges([]);
-                message.warning(`No profit ranges available for ${selectedCountry}.`);
-              }
+              const generatedRanges = staticRanges.map((range, index) => ({
+                key: `${range}-${index}`,
+                range: range,
+                profit: countryProfitData.ranges?.includes(range)
+                  ? `${countryProfitData.profit}%`
+                  : "0%",
+              }));
+
+              setCustomProfitRanges(generatedRanges);
             } else {
-              message.warning(`No data found for the selected country: ${selectedCountry}.`);
+              const initialRanges = staticRanges.map((range, index) => ({
+                key: `${range}-${index}`,
+                range: range,
+                profit: "0%", // Default profit if no data found
+              }));
+              setCustomProfitRanges(initialRanges);
+              message.warning(
+                `No data found for the selected country: ${selectedCountry}.`
+              );
             }
           } else {
-            message.error('Failed to load profit data.');
+            setCustomProfitRanges([]); // Reset the profit ranges on failure
+            message.error("Failed to load profit data.");
           }
         } catch (error) {
-          message.error('Error fetching profit data: ' + error.message);
+          setCustomProfitRanges([]); // Reset the profit ranges on error
+          message.error("Error fetching profit data: " + error.message);
         }
       };
       fetchProfitRanges();
+    } else {
+      setCustomProfitRanges([]); // Reset the profit ranges if no country is selected
     }
   }, [selectedCountry]);
-  
+
   const handleCountryChange = (value) => {
-    setSelectedCountry(value);
+    const country = JSON.parse(value);
+    console.log("country ->", country);
+    setSelectedCountry(country.iso);
+    setSelectedCountryId(country._id);
   };
 
   const handleProfitChange = (rangeKey, value) => {
     const updatedRanges = customProfitRanges.map((range) =>
-      range.key === rangeKey ? { ...range, profit: value + '%' } : range
+      range.key === rangeKey ? { ...range, profit: value + "%" } : range
     );
     setCustomProfitRanges(updatedRanges);
   };
-
-  const handleSave = () => {
-    console.log('Profit data saved:', customProfitRanges);
-    message.success('Profit data saved successfully.');
-  };
-
+ 
   const handleCreateProfit = async () => {
     const profitData = {
-        _id: { iso: selectedCountry },
-      ranges: customProfitRanges.map(range => range.range), // Collect the ranges to send
-      profitData: customProfitRanges.length > 0 ? customProfitRanges[0].profit.replace('%', '') : '0' // Use a default profit value if none are set
+      countryId: selectedCountryId,
+      ranges: customProfitRanges.map((range) => range.range), // Collect the ranges to send
+      profit:
+        customProfitRanges.length > 0
+          ? customProfitRanges[0].profit.replace("%", "")
+          : "0", // Use a default profit value if none are set
     };
-
+    console.log("abc ->", profitData);
     try {
-      const response = await fetch('https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/createProfitForCountry', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(profitData),
-      });
+      const response = await fetch(
+        "https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/createProfitForCountry",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(profitData),
+        }
+      );
 
       const data = await response.json();
       if (data.success) {
         message.success(data.message);
         setCustomProfitRanges([]); // Clear the ranges after successful submission
       } else {
-        message.error('Failed to create profit data.');
+        message.error("Failed to create profit data.");
       }
     } catch (error) {
-      message.error('Error creating profit data: ' + error.message);
+      message.error("Error creating profit data: " + error.message);
     }
+  };
+
+  const handleKeyDown = (e, rangeKey) => {
+    if (e.key === "ArrowUp") {
+      increaseProfit(rangeKey);
+    } else if (e.key === "ArrowDown") {
+      decreaseProfit(rangeKey);
+    }
+  };
+
+  const increaseProfit = (rangeKey) => {
+    const updatedRanges = customProfitRanges.map((range) => {
+      if (range.key === rangeKey) {
+        const newProfit = parseFloat(range.profit.replace("%", "")) + 1; // Increment by 1%
+        return { ...range, profit: `${newProfit}%` };
+      }
+      return range;
+    });
+    setCustomProfitRanges(updatedRanges);
+  };
+
+  const decreaseProfit = (rangeKey) => {
+    const updatedRanges = customProfitRanges.map((range) => {
+      if (range.key === rangeKey) {
+        const newProfit = Math.max(
+          parseFloat(range.profit.replace("%", "")) - 1,
+          0
+        ); // Decrement by 1%, minimum 0%
+        return { ...range, profit: `${newProfit}%` };
+      }
+      return range;
+    });
+    setCustomProfitRanges(updatedRanges);
   };
 
   const columns = [
     {
-      title: 'Range (Units)',
-      dataIndex: 'range',
-      key: 'range',
-      width: '50%',
+      title: "Range (Units)",
+      dataIndex: "range",
+      key: "range",
+      width: "50%",
     },
     {
-      title: 'Profit (%)',
-      dataIndex: 'profit',
-      key: 'profit',
-      width: '50%',
+      title: "Profit (%)",
+      dataIndex: "profit",
+      key: "profit",
+      width: "50%",
       render: (text, record) => (
         <Input
           type="number"
-          value={text.replace('%', '')}
+          value={text.replace("%", "")}
           onChange={(e) => handleProfitChange(record.key, e.target.value)}
           suffix="%"
+          onKeyDown={(e) => handleKeyDown(e, record.key)} // Add key down event handler
         />
       ),
     },
   ];
 
   return (
-    <div style={{ padding: '20px', maxWidth: '800px', margin: 'auto' }}>
+    <div style={{ padding: "20px", maxWidth: "800px", margin: "auto" }}>
       <Row justify="space-between" align="middle">
         <Col span={18}>
           <Title level={2}>Select Country to Set Profit Ranges</Title>
         </Col>
-        <Col span={6} style={{ textAlign: 'right' }}>
+        <Col span={6} style={{ textAlign: "right" }}>
           <Button type="primary" onClick={handleCreateProfit}>
             Save
           </Button>
@@ -674,16 +440,17 @@ useEffect(() => {
 
       <Select
         showSearch
-        style={{ width: '65%', marginBottom: '20px' }}
+        style={{ width: "65%", marginBottom: "20px" }}
         placeholder="Select a Country"
         optionFilterProp="children"
-        onChange={handleCountryChange}
+        onChange={(value) => handleCountryChange(value)}
         filterOption={(input, option) =>
           option.children.toLowerCase().includes(input.toLowerCase())
         }
       >
         {countries.map((country) => (
-          <Option key={country.iso} value={country.iso}>
+          // <Option key={country.iso} value={country.iso}>
+          <Option key={country.iso} value={JSON.stringify(country)}>
             {country.name}
           </Option>
         ))}
@@ -694,13 +461,13 @@ useEffect(() => {
           <Row justify="space-between" align="middle">
             <Col span={20}>
               <Title level={4}>
-                Profit Ranges for{' '}
+                Profit Ranges for{" "}
                 {countries.find((c) => c.iso === selectedCountry)?.name}
               </Title>
             </Col>
           </Row>
           <Table
-            style={{ width: '65%', marginBottom: '20px' }}
+            style={{ width: "65%", marginBottom: "20px" }}
             columns={columns}
             dataSource={customProfitRanges}
             pagination={false}

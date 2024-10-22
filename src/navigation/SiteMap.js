@@ -52,4 +52,14 @@ export const SiteMap = {
     ),
     description: "Countries Management",
   },
+  packages: {
+    title: "pricing management",                          
+    path: "/packages",
+    element: (
+      <CustomLayout>
+        <LazyComponent path="packages/packages" />
+      </CustomLayout>
+    ),
+    description: "Countries Management",
+  },
 };

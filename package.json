@@ -54,4 +54,7 @@
   "devDependencies": {
     "tailwindcss": "^3.4.13"
   }
+  ,
+  "proxy": "https://docs.esim-go.com"
+
 }
