@@ -1,235 +1,15 @@
-// import React, { useState } from 'react';
-// import { Table, Input, Button, Form, Modal } from 'antd';
 
-// const PackagesManagement = () => {
-//   // Initial packages data
-//   const [packages, setPackages] = useState([
-//     { id: 1, name: 'Basic', price: 10 },
-//     { id: 2, name: 'Standard', price: 20 },
-//     { id: 3, name: 'Premium', price: 30 },
-//   ]);
-
-//   const [editingPackage, setEditingPackage] = useState(null); // To store package being edited
-//   const [isModalOpen, setIsModalOpen] = useState(false); // For adding new package
-//   const [newPackage, setNewPackage] = useState({ name: '', price: '' });
-
-//   const handlePriceChange = (id, value) => {
-//     setPackages((prevPackages) =>
-//       prevPackages.map((pkg) =>
-//         pkg.id === id ? { ...pkg, price: value } : pkg
-//       )
-//     );
-//   };
-
-//   const openEditModal = (pkg) => {
-//     setEditingPackage(pkg);
-//     setIsModalOpen(true);
-//   };
-
-//   const handleSave = () => {
-//     setIsModalOpen(false);
-//     setEditingPackage(null); // Close modal and reset editing state
-//   };
-
-//   const addNewPackage = () => {
-//     setPackages([
-//       ...packages,
-//       { id: packages.length + 1, name: newPackage.name, price: newPackage.price },
-//     ]);
-//     setNewPackage({ name: '', price: '' });
-//     setIsModalOpen(false);
-//   };
-
-//   const columns = [
-//     {
-//       title: 'Package',
-//       dataIndex: 'name',
-//       key: 'name',
-//     },
-//     {
-//       title: 'Price ($)',
-//       dataIndex: 'price',
-//       key: 'price',
-//       render: (text, record) => (
-//         <Input
-//           value={record.price}
-//           onChange={(e) => handlePriceChange(record.id, e.target.value)}
-//         />
-//       ),
-//     },
-   
-//   ];
-
-//   return (
-//     <div>
-//       <h2>Packages Management</h2>
-//       <Table dataSource={packages} columns={columns} rowKey="id" pagination={false} />
-
-//       <Button type="primary" onClick={() => setIsModalOpen(true)} style={{ marginTop: '1rem' }}>
-//         Add New Package
-//       </Button>
-
-//       <Modal
-//         title={editingPackage ? `Edit ${editingPackage.name}` : 'Add New Package'}
-//         visible={isModalOpen}
-//         onOk={editingPackage ? handleSave : addNewPackage}
-//         onCancel={() => setIsModalOpen(false)}
-//       >
-       
-//           <Form>
-//             <Form.Item label="Package Name">
-//               <Input
-//                 value={newPackage.name}
-//                 onChange={(e) => setNewPackage({ ...newPackage, name: e.target.value })}
-//               />
-//             </Form.Item>
-//             <Form.Item label="Price">
-//               <Input
-//                 value={newPackage.price}
-//                 onChange={(e) => setNewPackage({ ...newPackage, price: e.target.value })}
-//               />
-//             </Form.Item>
-//           </Form>
-        
-//       </Modal>
-//     </div>
-//   );
-// };
-
-// export default PackagesManagement;
-
-
-// import React, { useState, useEffect } from 'react';
-// import { Table, Input, Button, Form, Modal } from 'antd';
-
-// const PackagesManagement = () => {
-//   // Initial state for packages data
-//   const [packages, setPackages] = useState([]);
-//   const [editingPackage, setEditingPackage] = useState(null); // To store package being edited
-//   const [isModalOpen, setIsModalOpen] = useState(false); // For adding new package
-//   const [newPackage, setNewPackage] = useState({ name: '', price: '' });
-
-//   // Fetch API to get packages data
-//   const fetchPackages = async () => {
-//     const apiKey="0XsdCB2BqnzIOB3vMNQyKMy7yfjeQMQEkpH3i-Pj"
-//     try {
-//       const response = await fetch(
-//         `https://api.esim-go.com/v2.3/catalogue?countries=${iso}`,
-//         {
-//           method: 'GET',
-//           headers: {
-//             'X-API-Key': apiKey,
-//             'Content-Type': 'application/json',
-//           },
-//         }
-//       );
-
-//       if (!response.ok) {
-//         throw new Error('Failed to fetch packages');
-//       }
-
-//       const data = await response.json();
-//       // Assuming the API response has a list of packages in 'data' field
-//       setPackages(data.packages); // Update the packages state with the API response
-//     } catch (error) {
-//       console.error('Error fetching packages:', error);
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchPackages(); // Call the fetch function when component mounts
-//   }, []);
-
-//   const handlePriceChange = (id, value) => {
-//     setPackages((prevPackages) =>
-//       prevPackages.map((pkg) =>
-//         pkg.id === id ? { ...pkg, price: value } : pkg
-//       )
-//     );
-//   };
-
-
-
-//   const handleSave = () => {
-//     setIsModalOpen(false);
-//     setEditingPackage(null); // Close modal and reset editing state
-//   };
-
-//   const addNewPackage = () => {
-//     setPackages([
-//       ...packages,
-//       { id: packages.length + 1, name: newPackage.name, price: newPackage.price },
-//     ]);
-//     setNewPackage({ name: '', price: '' });
-//     setIsModalOpen(false);
-//   };
-
-//   const columns = [
-//     {
-//       title: 'Package',
-//       dataIndex: 'name',
-//       key: 'name',
-//     },
-//     {
-//       title: 'Price ($)',
-//       dataIndex: 'price',
-//       key: 'price',
-//       render: (text, record) => (
-//         <Input
-//           value={record.price}
-//           onChange={(e) => handlePriceChange(record.id, e.target.value)}
-//         />
-//       ),
-//     },
-//   ];
-
-//   return (
-//     <div>
-//       <h2>Packages Management</h2>
-//       <Table dataSource={packages} columns={columns} rowKey="id" pagination={false} />
-
-//       <Button type="primary" onClick={() => setIsModalOpen(true)} style={{ marginTop: '1rem' }}>
-//         Add New Package
-//       </Button>
-
-//       <Modal
-//         title={editingPackage ? `Edit ${editingPackage.name}` : 'Add New Package'}
-//         visible={isModalOpen}
-//         onOk={editingPackage ? handleSave : addNewPackage}
-//         onCancel={() => setIsModalOpen(false)}
-//       >
-//         <Form>
-//           <Form.Item label="Package Name">
-//             <Input
-//               value={newPackage.name}
-//               onChange={(e) => setNewPackage({ ...newPackage, name: e.target.value })}
-//             />
-//           </Form.Item>
-//           <Form.Item label="Price">
-//             <Input
-//               value={newPackage.price}
-//               onChange={(e) => setNewPackage({ ...newPackage, price: e.target.value })}
-//             />
-//           </Form.Item>
-//         </Form>
-//       </Modal>
-//     </div>
-//   );
-// };
-
-// export default PackagesManagement;
-
+import { Table, Input, Select } from 'antd';
 import React, { useState, useEffect } from 'react';
-import { Table, Input, Button, Form, Modal } from 'antd';
+const { Option } = Select;
 
 const PackagesManagement = () => {
-  const [packages, setPackages] = useState([]);
-  const [editingPackage, setEditingPackage] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [newPackage, setNewPackage] = useState({ name: '', price: '' });
-  const [iso, setIso] = useState('US'); // Default country code
+  const [bundles, setBundles] = useState([]);
+  const [countries, setCountries] = useState([]); // State for storing country options
+  const [iso, setIso] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const fetchPackages = async () => {
+  const fetchBundles = async () => {
     const apiKey = "0XsdCB2BqnzIOB3vMNQyKMy7yfjeQMQEkpH3i-Pj";
     try {
       const response = await fetch(
@@ -244,47 +24,56 @@ const PackagesManagement = () => {
       );
 
       if (!response.ok) {
-        throw new Error('Failed to fetch packages');
+        throw new Error('Failed to fetch bundles');
       }
 
       const data = await response.json();
-      setPackages(data.packages);
+      setBundles(data.bundles);
+      
+      // Update countries only if it’s the first fetch
+      if (countries.length === 0) {
+        const countryOptions = data.bundles.map(bundle => 
+          bundle.countries[0] && { 
+            name: bundle.countries[0].name, 
+            iso: bundle.countries[0].iso 
+          }
+        ).filter(Boolean);
+        setCountries([...new Map(countryOptions.map(item => [item.iso, item])).values()]); // Remove duplicates by ISO code
+      }
+      
     } catch (error) {
-      console.error('Error fetching packages:', error);
+      console.error('Error fetching bundles:', error);
     }
   };
 
   useEffect(() => {
-    fetchPackages();
-  }, [iso]); // Re-fetch data when 'iso' changes
+    fetchBundles();
+  }, [iso]);
 
-  const handlePriceChange = (id, value) => {
-    setPackages((prevPackages) =>
-      prevPackages.map((pkg) =>
-        pkg.id === id ? { ...pkg, price: value } : pkg
+  const handlePriceChange = (name, value) => {
+    setBundles((prevBundles) =>
+      prevBundles.map((bundle) =>
+        bundle.name === name ? { ...bundle, price: value } : bundle
       )
     );
   };
 
-  const handleSave = () => {
-    setIsModalOpen(false);
-    setEditingPackage(null);
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
   };
+// Filter bundles based on the search query, removing spaces
+const filteredBundles = bundles.filter(bundle =>
+  (bundle.description.toLowerCase().replace(/\s+/g, '').includes(searchQuery.toLowerCase().replace(/\s+/g, '')) ||
+   (Array.isArray(bundle.groups) ? bundle.groups.join(' ').toLowerCase().replace(/\s+/g, '').includes(searchQuery.toLowerCase().replace(/\s+/g, '')) : false))
+);
 
-  const addNewPackage = () => {
-    setPackages([
-      ...packages,
-      { id: packages.length + 1, name: newPackage.name, price: newPackage.price },
-    ]);
-    setNewPackage({ name: '', price: '' });
-    setIsModalOpen(false);
-  };
+  
 
   const columns = [
     {
       title: 'Package',
-      dataIndex: 'name',
-      key: 'name',
+      dataIndex: 'groups',
+      key: 'groups',
     },
     {
       title: 'Price ($)',
@@ -293,9 +82,25 @@ const PackagesManagement = () => {
       render: (text, record) => (
         <Input
           value={record.price}
-          onChange={(e) => handlePriceChange(record.id, e.target.value)}
+          onChange={(e) => handlePriceChange(record.name, e.target.value)}
         />
       ),
+    },
+    {
+      title: 'Duration (Days)',
+      dataIndex: 'duration',
+      key: 'duration',
+    },
+    {
+      title: 'Data Amount (MB)',
+      dataIndex: 'dataAmount',
+      key: 'dataAmount',
+      render: (dataAmount) => (dataAmount === -1 ? 'Unlimited' : `${dataAmount} MB`),
+    },
+    {
+      title: 'Country',
+      dataIndex: ['countries', 0, 'name'],
+      key: 'country',
     },
   ];
 
@@ -303,45 +108,27 @@ const PackagesManagement = () => {
     <div>
       <h2>Packages Management</h2>
 
-      {/* Country code input */}
-      <Input
-        placeholder="Enter ISO country code"
+      <Select
+        placeholder="Select ISO country code"
         value={iso}
-        onChange={(e) => setIso(e.target.value.toUpperCase())}
-        style={{ marginBottom: '1rem' }}
+        onChange={setIso}
+        style={{ width: "100%", marginBottom: '1rem' }}
+      >
+        {countries.map(country => (
+          <Option key={country.iso} value={country.iso}>
+            {country.name}
+          </Option>
+        ))}
+      </Select>
+
+      <Input
+        placeholder="Search for a package"
+        value={searchQuery}
+        onChange={handleSearchChange}
+        style={{ width: "40%", marginBottom: '1rem' }}
       />
 
-      <Table dataSource={packages} columns={columns} rowKey="id" pagination={false} />
-
-      <Button
-        type="primary"
-        onClick={() => setIsModalOpen(true)}
-        style={{ marginTop: '1rem' }}
-      >
-        Add New Package
-      </Button>
-
-      <Modal
-        title={editingPackage ? `Edit ${editingPackage.name}` : 'Add New Package'}
-        visible={isModalOpen}
-        onOk={editingPackage ? handleSave : addNewPackage}
-        onCancel={() => setIsModalOpen(false)}
-      >
-        <Form>
-          <Form.Item label="Package Name">
-            <Input
-              value={newPackage.name}
-              onChange={(e) => setNewPackage({ ...newPackage, name: e.target.value })}
-            />
-          </Form.Item>
-          <Form.Item label="Price">
-            <Input
-              value={newPackage.price}
-              onChange={(e) => setNewPackage({ ...newPackage, price: e.target.value })}
-            />
-          </Form.Item>
-        </Form>
-      </Modal>
+      <Table dataSource={filteredBundles} columns={columns} rowKey="name" pagination={false} />
     </div>
   );
 };
