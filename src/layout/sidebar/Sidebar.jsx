@@ -15,7 +15,7 @@ const { Sider } = Layout;
 
 const Sidebar = ({ collapsed }) => {
   return (
-    <Sider trigger={null} collapsible collapsed={collapsed}>
+    <Sider trigger={null} collapsible collapsed={collapsed} width={240}>
       <div className="demo-logo-vertical" />
       <div
         className={"flex , justify-center items-center  text-white mt-6 mb-5"}

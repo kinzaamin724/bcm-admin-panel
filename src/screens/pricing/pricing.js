@@ -9,6 +9,7 @@ import {
   Row,
   Col,
   message,
+  Spin,
 } from "antd";
 import "antd/dist/reset.css";
 
@@ -20,16 +21,18 @@ const ProfitInput = () => {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [customProfitRanges, setCustomProfitRanges] = useState([]);
   const [selectedCountryId, setSelectedCountryId] = useState("");
+  const [loading, setLoading] = useState(false); // Loader state
 
   const staticRanges = [
-    "0-9", "10-19", "20-29", "30-39", "40-49", "50-59", 
-    "60-69", "70-79", "80-89", "90-99", "100-109", "110-119", 
-    "120-129", "130-139", "140-149", "150-159", "160-169", 
-    "170-179", "180-189", "190-199", "200-209", "210-219", 
-    "220-229", "230-239", "240-249", "250-259", "260-269", 
-    "270-279", "280-289", "290-300",
+    "0-9", "9.1-19", "19.1-29", "29.1-39", "39.1-49", "49.1-59",
+    "59.1-69", "69.1-79", "79.1-89", "89.1-99", "99.1-109", "109.1-119",
+    "119.1-129", "129.1-139", "139.1-149", "149.1-159", "159.1-169",
+    "169.1-179", "179.1-189", "189.1-199", "199.1-209", "209.1-219",
+    "219.1-229", "229.1-239", "239.1-249", "249.1-259", "259.1-269",
+    "269.1-279", "279.1-289", "289.1-300"
   ];
 
+  // Fetch countries on component mount
   useEffect(() => {
     const fetchCountries = async () => {
       try {
@@ -50,49 +53,58 @@ const ProfitInput = () => {
     fetchCountries();
   }, []);
 
-  useEffect(() => {
-    const fetchProfitRanges = async () => {
-      if (!selectedCountry) return; // Return early if no country is selected
+  // Define fetchProfitRanges as a standalone function to use in both the effect and the save handler
+  const fetchProfitRanges = async () => {
+    if (!selectedCountry) return; // Return early if no country is selected
 
-      try {
-        const response = await fetch(
-          "https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/getAllProfits"
+    setLoading(true); // Start loading
+
+    try {
+      const response = await fetch(
+        "https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/getAllProfits"
+      );
+      const data = await response.json();
+
+      if (data.success) {
+        const countryProfitData = data.data.find(
+          (item) => item.countryId && item.countryId.iso === selectedCountry
         );
-        const data = await response.json();
 
-        if (data.success) {
-          const countryProfitData = data.data.find(
-            (item) => item.countryId && item.countryId.iso === selectedCountry
-          );
-
-          if (countryProfitData) {
-            const generatedRanges = staticRanges.map((range, index) => {
-              const profitValue = countryProfitData.ranges?.find(r => r.range === range)?.profit || 0;
-              return {
-                key: `${range}-${index}`,
-                range: range,
-                profit: profitValue,
-              };
-            });
-
-            setCustomProfitRanges(generatedRanges);
-          } else {
-            const initialRanges = staticRanges.map((range, index) => ({
+        if (countryProfitData) {
+          const generatedRanges = staticRanges.map((range, index) => {
+            const profitValue = countryProfitData.ranges?.find(
+              (r) => r.range === range
+            )?.profit || 0;
+            return {
               key: `${range}-${index}`,
               range: range,
-              profit: 0,
-            }));
-            setCustomProfitRanges(initialRanges);
-          }
+              profit: profitValue,
+            };
+          });
+
+          setCustomProfitRanges(generatedRanges);
         } else {
-          setCustomProfitRanges([]);
-          message.error("Failed to load profit data.");
+          const initialRanges = staticRanges.map((range, index) => ({
+            key: `${range}-${index}`,
+            range: range,
+            profit: 0,
+          }));
+          setCustomProfitRanges(initialRanges);
         }
-      } catch (error) {
+      } else {
         setCustomProfitRanges([]);
-        message.error("Error fetching profit data: " + error.message);
+        message.error("Failed to load profit data.");
       }
-    };
+    } catch (error) {
+      setCustomProfitRanges([]);
+      message.error("Error fetching profit data: " + error.message);
+    } finally {
+      setLoading(false); // Stop loading
+    }
+  };
+
+  // Fetch profit ranges when a country is selected
+  useEffect(() => {
     fetchProfitRanges();
   }, [selectedCountry]);
 
@@ -110,6 +122,7 @@ const ProfitInput = () => {
   };
 
   const handleCreateProfit = async () => {
+    setLoading(true); // Start loading
     const profitData = {
       countryId: selectedCountryId,
       ranges: customProfitRanges.map((range) => ({
@@ -117,7 +130,7 @@ const ProfitInput = () => {
         profit: range.profit,
       })),
     };
-    
+
     try {
       const response = await fetch(
         "https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/createProfitForCountry",
@@ -132,13 +145,17 @@ const ProfitInput = () => {
 
       const data = await response.json();
       if (data.success) {
-        message.success(data.message);
-        setCustomProfitRanges([]); // Clear ranges after success
+        message.success("Profit Updated Successfully");
+
+        // Refetch updated profit ranges after saving
+        fetchProfitRanges();
       } else {
         message.error("Failed to create profit data.");
       }
     } catch (error) {
       message.error("Error creating profit data: " + error.message);
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -157,7 +174,7 @@ const ProfitInput = () => {
       render: (text, record) => (
         <Input
           type="number"
-          value={record.profit} // Directly use profit value
+          value={record.profit}
           onChange={(e) => handleProfitChange(record.key, e.target.value)}
         />
       ),
@@ -166,53 +183,55 @@ const ProfitInput = () => {
 
   return (
     <div style={{ padding: "20px", maxWidth: "800px", margin: "auto" }}>
-      <Row justify="space-between" align="middle">
-        <Col span={18}>
-          <Title level={2}>Select Country to Set Profit Ranges</Title>
-        </Col>
-        <Col span={6} style={{ textAlign: "right" }}>
-          <Button type="primary" onClick={handleCreateProfit}>
-            Save
-          </Button>
-        </Col>
-      </Row>
+      <Spin spinning={loading}> {/* Loader for the whole screen */}
+        <Row justify="space-between" align="middle">
+          <Col span={18}>
+            <Title level={2}>Select Country to Set Profit Ranges</Title>
+          </Col>
+          <Col span={6} style={{ textAlign: "right" }}>
+            <Button type="primary" onClick={handleCreateProfit} disabled={loading}>
+              Save
+            </Button>
+          </Col>
+        </Row>
 
-      <Select
-        showSearch
-        style={{ width: "65%", marginBottom: "20px" }}
-        placeholder="Select a Country"
-        optionFilterProp="children"
-        onChange={(value) => handleCountryChange(value)}
-        filterOption={(input, option) =>
-          option.children.toLowerCase().includes(input.toLowerCase())
-        }
-      >
-        {countries.map((country) => (
-          <Option key={country.iso} value={JSON.stringify(country)}>
-            {country.name}
-          </Option>
-        ))}
-      </Select>
+        <Select
+          showSearch
+          style={{ width: "65%", marginBottom: "20px" }}
+          placeholder="Select a Country"
+          optionFilterProp="children"
+          onChange={(value) => handleCountryChange(value)}
+          filterOption={(input, option) =>
+            option.children.toLowerCase().includes(input.toLowerCase())
+          }
+        >
+          {countries.map((country) => (
+            <Option key={country.iso} value={JSON.stringify(country)}>
+              {country.name}
+            </Option>
+          ))}
+        </Select>
 
-      {selectedCountry && (
-        <div>
-          <Row justify="space-between" align="middle">
-            <Col span={20}>
-              <Title level={4}>
-                Profit Ranges for{" "}
-                {countries.find((c) => c.iso === selectedCountry)?.name}
-              </Title>
-            </Col>
-          </Row>
-          <Table
-            style={{ width: "65%", marginBottom: "20px" }}
-            columns={columns}
-            dataSource={customProfitRanges}
-            pagination={false}
-            bordered
-          />
-        </div>
-      )}
+        {selectedCountry && (
+          <div>
+            <Row justify="space-between" align="middle">
+              <Col span={20}>
+                <Title level={4}>
+                  Profit Ranges for{" "}
+                  {countries.find((c) => c.iso === selectedCountry)?.name}
+                </Title>
+              </Col>
+            </Row>
+            <Table
+              style={{ width: "65%", marginBottom: "20px" }}
+              columns={columns}
+              dataSource={customProfitRanges}
+              pagination={false}
+              bordered
+            />
+          </div>
+        )}
+      </Spin>
     </div>
   );
 };

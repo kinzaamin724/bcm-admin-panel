@@ -26,6 +26,7 @@ const Home = () => {
       title: "Profile Image",
       dataIndex: "profileImage",
       key: "profileImage",
+     
       align: "center",
       render: (image, record) => {
         const email = record.email || "";
@@ -44,12 +45,14 @@ const Home = () => {
       dataIndex: "email",
       key: "email",
       align: "center",
+      
     },
     {
       title: "First Name",
       dataIndex: "firstName",
       key: "firstName",
       align: "center",
+   
       render: (text) => (text ? text : "N/A"),
     },
     {
@@ -57,6 +60,7 @@ const Home = () => {
       dataIndex: "lastName",
       key: "lastName",
       align: "center",
+      
       render: (text) => (text ? text : "N/A"),
     },
 
@@ -65,12 +69,14 @@ const Home = () => {
       dataIndex: "createdAt",
       key: "createdAt",
       align: "center",
+     
       render: (date) => new Date(date).toLocaleString(),
     },
     {
       title: "Action",
       key: "action",
       align: "center",
+     
       render: (_, record) => (
         <Popconfirm
           title="Are you sure to delete this user?"
@@ -90,6 +96,7 @@ const Home = () => {
       title: "Status",
       key: "status",
       align: "center",
+    
       render: (_, record) => (
         <Spin spinning={spinning && currentlyUpdating === record._id}>
           <Switch
@@ -175,6 +182,7 @@ const Home = () => {
         loading={loading}
         columns={columns}
         dataSource={data.users}
+        tableLayout="fixed" // Add this line to enforce equal widths
         rowKey="_id"
         scroll={{ x: 800 }}
         pagination={{

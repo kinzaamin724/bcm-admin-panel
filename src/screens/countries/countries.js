@@ -107,6 +107,7 @@ function Countries() {
         columns={columns}
         dataSource={data.countries}
         rowKey="_id"
+        tableLayout="fixed" // Add this line to enforce equal widths
         scroll={{ x: 800 }}
         pagination={{
           current: currentPage,
