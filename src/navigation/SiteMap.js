@@ -52,6 +52,16 @@ export const SiteMap = {
     ),
     description: "Countries Management",
   },
+  packages: {
+    title: "subscription management",                          
+    path: "/subscription",
+    element: (
+      <CustomLayout>
+        <LazyComponent path="subscription/subscription" />
+      </CustomLayout>
+    ),
+    description: "Subscription Management",
+  },
   // packages: {
   //   title: "pricing management",                          
   //   path: "/packages",
@@ -60,6 +70,7 @@ export const SiteMap = {
   //       <LazyComponent path="packages/packages" />
   //     </CustomLayout>
   //   ),
-  //   description: "Countries Management",
+  //   description: "Pricing Management",
   // },
+
 };

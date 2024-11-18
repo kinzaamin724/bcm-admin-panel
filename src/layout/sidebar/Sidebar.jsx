@@ -43,7 +43,7 @@ const Sidebar = ({ collapsed }) => {
         <Menu.Item key="3" icon={<UploadOutlined />}>
           <NavLink
             className={({ isActive }) => (isActive ? "active-link" : "")}
-            to="/packages"
+            to="/subscription"
           >
             Subscription Management
           </NavLink>
