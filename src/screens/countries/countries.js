@@ -3,8 +3,8 @@ import { message, Switch, Table, Typography, Upload, Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { storage } from "../../components/firebase/FirebaseConfig"; // Import your firebase configuration
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage"; // Import necessary functions from Firebase
+import { storage } from "../../components/firebase/FirebaseConfig"; 
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage"; 
 
 function Countries() {
   const [data, setData] = useState({ countries: [], totalRecords: 0 });
@@ -60,14 +60,14 @@ function Countries() {
   };
 
   const handleUpload = async (file, countryId) => {
-    const storageRef = ref(storage, `images/${countryId}/${file.name}`); // Use countryId here
+    const storageRef = ref(storage, `images/${countryId}/${file.name}`); 
     try {
       await uploadBytes(storageRef, file);
       const url = await getDownloadURL(storageRef);
   
-      // Send the correct countryId to the API
+      
       await axios.post(`https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/updateCountryImage`, {
-        countryId: countryId, // Use countryId here
+        countryId: countryId,
         bgImage: url,
       });
   
@@ -88,10 +88,10 @@ function Countries() {
         countriesWithUploader.includes(record.name) ? (
           <Upload
             beforeUpload={(file) => {
-              handleUpload(file, record._id); // Pass the correct countryId here
-              return false; // Prevent automatic upload
+              handleUpload(file, record._id); 
+              return false; 
             }}
-            showUploadList={false} // Hide the default upload list
+            showUploadList={false} 
           >
             <Button icon={<UploadOutlined />}>Upload</Button>
           </Upload>
@@ -146,7 +146,7 @@ function Countries() {
         columns={columns}
         dataSource={data.countries}
         rowKey="_id"
-        tableLayout="fixed" // Add this line to enforce equal widths
+        tableLayout="fixed" 
         scroll={{ x: 800 }}
         pagination={{
           current: currentPage,

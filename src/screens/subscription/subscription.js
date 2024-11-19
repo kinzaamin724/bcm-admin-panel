@@ -21,13 +21,15 @@ const Subscription = () => {
       if (response.data.allSubscriptions) {
         const data = response.data.allSubscriptions.map((item, index) => ({
           key: (page - 1) * limit + (index + 1),
-          profile: `${item.userId?.firstName} ${item.userId?.lastName}`,
+          customerEmail: item.customerEmail || 'N/A',
+          ammountOriginalPrice:`$${parseFloat(item.ammountOriginalPrice || 0).toFixed(2)}`,
+           userOldInAppCash:`$${parseFloat(item.userOldInAppCash || 0).toFixed(2)}`,
           country: item.country || 'N/A',
           dataType: item.dataType || 'N/A',
           validity: item.validity || 'N/A',
           payment: `$${parseFloat(item.payment || 0).toFixed(2)}`,
           cashBackAmount: `$${parseFloat(item.cashBackAmmount || 0).toFixed(2)}`,
-          cashbackPercentage: `${parseFloat(item.cashbackPercentage || 0).toFixed(2).padStart(5, '0')}%`,
+          // cashbackPercentage: `${parseFloat(item.cashbackPercentage || 0).toFixed(2).padStart(5, '0')}%`,
           iccID: item.iccid,
         }));
         setSubscriptions(data);
@@ -50,9 +52,9 @@ const Subscription = () => {
 
   const columns = [
     {
-      title: 'Profile',
-      dataIndex: 'profile',
-      key: 'profile',
+      title: 'Email',
+      dataIndex: 'customerEmail',
+      key: 'customerEmail',
     },
     {
       title: 'Country',
@@ -75,15 +77,28 @@ const Subscription = () => {
       key: 'payment',
     },
     {
+      title: 'Original Price',
+      dataIndex: 'ammountOriginalPrice',
+      key: 'ammountOriginalPrice',
+    }
+    ,
+    {
       title: 'Cash Back Amount',
       dataIndex: 'cashBackAmount',
       key: 'cashBackAmount',
     },
     {
-      title: 'Cash Back Percentage',
-      dataIndex: 'cashbackPercentage',
-      key: 'cashbackPercentage',
+      title: "Old In-App Cash",
+      dataIndex: "userOldInAppCash",
+      key: "userOldInAppCash",
     },
+   
+
+    // {
+    //   title: 'Cash Back Percentage',
+    //   dataIndex: 'cashbackPercentage',
+    //   key: 'cashbackPercentage',
+    // },
     {
       title: 'ICC ID',
       dataIndex: 'iccID',

@@ -21,7 +21,7 @@ const ProfitInput = () => {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [customProfitRanges, setCustomProfitRanges] = useState([]);
   const [selectedCountryId, setSelectedCountryId] = useState("");
-  const [loading, setLoading] = useState(false); // Loader state
+  const [loading, setLoading] = useState(false); 
 
   const staticRanges = [
    "0-9", "9-19", "19-29", "29-39", "39-49", "49-59", "59-69", "69-79", "79-89", "89-99", 
@@ -31,7 +31,7 @@ const ProfitInput = () => {
 
   ];
 
-  // Fetch countries on component mount
+  
   useEffect(() => {
     const fetchCountries = async () => {
       try {
@@ -52,11 +52,11 @@ const ProfitInput = () => {
     fetchCountries();
   }, []);
 
-  // Define fetchProfitRanges as a standalone function to use in both the effect and the save handler
+  
   const fetchProfitRanges = async () => {
-    if (!selectedCountry) return; // Return early if no country is selected
+    if (!selectedCountry) return; 
 
-    setLoading(true); // Start loading
+    setLoading(true); 
 
     try {
       const response = await fetch(
@@ -98,11 +98,11 @@ const ProfitInput = () => {
       setCustomProfitRanges([]);
       message.error("Error fetching profit data: " + error.message);
     } finally {
-      setLoading(false); // Stop loading
+      setLoading(false);
     }
   };
 
-  // Fetch profit ranges when a country is selected
+  
   useEffect(() => {
     fetchProfitRanges();
   }, [selectedCountry]);
@@ -121,7 +121,7 @@ const ProfitInput = () => {
   };
 
   const handleCreateProfit = async () => {
-    setLoading(true); // Start loading
+    setLoading(true); 
     const profitData = {
       countryId: selectedCountryId,
       ranges: customProfitRanges.map((range) => ({
@@ -146,7 +146,7 @@ const ProfitInput = () => {
       if (data.success) {
         message.success("Profit Updated Successfully");
 
-        // Refetch updated profit ranges after saving
+        
         fetchProfitRanges();
       } else {
         message.error("Failed to create profit data.");
@@ -154,7 +154,7 @@ const ProfitInput = () => {
     } catch (error) {
       message.error("Error creating profit data: " + error.message);
     } finally {
-      setLoading(false); // Stop loading
+      setLoading(false); 
     }
   };
 
@@ -182,7 +182,7 @@ const ProfitInput = () => {
 
   return (
     <div style={{ padding: "20px", maxWidth: "800px", margin: "auto" }}>
-      <Spin spinning={loading}> {/* Loader for the whole screen */}
+      <Spin spinning={loading}> 
         <Row justify="space-between" align="middle">
           <Col span={18}>
             <Title level={2}>Select Country to Set Profit Ranges</Title>

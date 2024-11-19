@@ -47,6 +47,7 @@ const Home = () => {
       align: "center",
       
     },
+   
     {
       title: "First Name",
       dataIndex: "firstName",
@@ -62,6 +63,14 @@ const Home = () => {
       align: "center",
       
       render: (text) => (text ? text : "N/A"),
+    },
+    {
+      title: "Refrence ID",
+      dataIndex: "_id",
+      key: "_id",
+      align: "center",
+     
+    
     },
 
     {
@@ -145,7 +154,7 @@ const Home = () => {
   }, [currentPage, pageSize]);
 
   const toggleUserStatus = async (id, val) => {
-    setSpinning(true); // Show the spinner
+    setSpinning(true); 
     try {
       await axios.put(
         `https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/blockUnBlockUser`,
@@ -182,7 +191,7 @@ const Home = () => {
         loading={loading}
         columns={columns}
         dataSource={data.users}
-        tableLayout="fixed" // Add this line to enforce equal widths
+        tableLayout="fixed" 
         rowKey="_id"
         scroll={{ x: 800 }}
         pagination={{

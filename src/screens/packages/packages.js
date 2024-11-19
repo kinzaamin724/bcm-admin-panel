@@ -5,7 +5,7 @@ const { Option } = Select;
 
 const PackagesManagement = () => {
   const [bundles, setBundles] = useState([]);
-  const [countries, setCountries] = useState([]); // State for storing country options
+  const [countries, setCountries] = useState([]);
   const [iso, setIso] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -30,7 +30,7 @@ const PackagesManagement = () => {
       const data = await response.json();
       setBundles(data.bundles);
       
-      // Update countries only if it’s the first fetch
+     
       if (countries.length === 0) {
         const countryOptions = data.bundles.map(bundle => 
           bundle.countries[0] && { 
@@ -38,7 +38,7 @@ const PackagesManagement = () => {
             iso: bundle.countries[0].iso 
           }
         ).filter(Boolean);
-        setCountries([...new Map(countryOptions.map(item => [item.iso, item])).values()]); // Remove duplicates by ISO code
+        setCountries([...new Map(countryOptions.map(item => [item.iso, item])).values()]); 
       }
       
     } catch (error) {
@@ -61,7 +61,7 @@ const PackagesManagement = () => {
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
-// Filter bundles based on the search query, removing spaces
+
 const filteredBundles = bundles.filter(bundle =>
   (bundle.description.toLowerCase().replace(/\s+/g, '').includes(searchQuery.toLowerCase().replace(/\s+/g, '')) ||
    (Array.isArray(bundle.groups) ? bundle.groups.join(' ').toLowerCase().replace(/\s+/g, '').includes(searchQuery.toLowerCase().replace(/\s+/g, '')) : false))
@@ -103,7 +103,6 @@ const filteredBundles = bundles.filter(bundle =>
       key: 'country',
     },
   ];
-
   return (
     <div>
       <h2>Packages Management</h2>
