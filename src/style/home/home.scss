@@ -7,4 +7,14 @@
   .ant-table-thead > tr > th {
     text-align: center;
   }
+  .search-input{
+    display: flex;
+    align-items: center;
+    gap: 6rem;
+    margin-bottom: 20px;
   
+  }
+  .search-email{
+    padding: 10px;
+    width: 30%;
+  }
