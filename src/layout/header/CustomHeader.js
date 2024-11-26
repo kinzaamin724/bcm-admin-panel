@@ -6,24 +6,24 @@ import { theme } from 'antd';
 import { RiLogoutCircleRLine } from 'react-icons/ri';
 import Profile from "../../assets/home/profile.png";
 import "../../style/layout/layout.scss";
+import { useNavigate } from 'react-router-dom';
 
 const { Header } = Layout;
 
 const CustomHeader = ({ collapsed, toggle }) => {
-  const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const [isMenuVisible, setIsMenuVisible] = useState(false); 
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-
+  const navigate = useNavigate();
   const showPopconfirm = () => {
     setIsMenuVisible(true);
   };
-
   const handleConfirm = () => {
     message.success('Logged out successfully');
     setIsMenuVisible(false);
+    navigate('/login');
   };
-
   const handleCancel = () => {
     setIsMenuVisible(false);
   };

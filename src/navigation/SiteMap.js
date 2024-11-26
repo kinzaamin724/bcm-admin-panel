@@ -1,7 +1,9 @@
 import CustomLayout from "../layout/CustomLayouts";
+import LoginPage from "../screens/login";
 import LazyComponent from "./LazyComponent";
 
 export const SiteMap = {
+
   home: {
     title: "home",
     path: "/",
@@ -12,6 +14,7 @@ export const SiteMap = {
     ),
     description: "home-Page",
   },
+  
   businessProfile: {
     title: "businessProfileome",
     path: "/businessProfile",
@@ -31,7 +34,7 @@ export const SiteMap = {
       </CustomLayout>
     ),
     description: "Shop-Page",
-  },
+  }, 
   countries: {
     title: "country management",                          
     path: "/countries",
@@ -41,7 +44,7 @@ export const SiteMap = {
       </CustomLayout>
     ),
     description: "Countries Management",
-  },
+  }, 
   pricing: {
     title: "pricing management",                          
     path: "/pricing",
@@ -72,5 +75,15 @@ export const SiteMap = {
   //   ),
   //   description: "Pricing Management",
   // },
+  login:{
+    title: "login",
+    path: "/login",
+    element: (
+      
+        <LoginPage/>
+     
+    ),
+  
+  }
 
 };
