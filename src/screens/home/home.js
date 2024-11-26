@@ -9,9 +9,8 @@ import {
   Switch,
   Table,
   Typography,
-}
-from "antd";
-import React, { useEffect, useState } from "react";
+} from "antd";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import "../../style/home/home.scss";
 
@@ -19,7 +18,7 @@ const Home = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
-  const [searchQuery, setSearchQuery] = useState(""); 
+  const [searchQuery, setSearchQuery] = useState("");
   const [spinning, setSpinning] = useState(false);
   const [currentlyUpdating, setCurrentlyUpdating] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -110,28 +109,43 @@ const Home = () => {
     },
   ];
 
- 
-  const fetchData = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(
-        `https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/all`,
-        {
-          params: {
-            page: currentPage,
-            limit: pageSize,
-            ...(searchQuery && { search: searchQuery }), 
-          },
-        }
-      );
-      setData(response.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    } finally {
-      setLoading(false);
-    }
+  const fetchData = useCallback(
+    async (page = currentPage, limit = pageSize, query = searchQuery) => {
+      try {
+        setLoading(true);
+        const response = await axios.get(
+          `https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/all`,
+          {
+            params: {
+              page,
+              limit,
+              ...(query && { search: query }),
+            },
+          }
+        );
+        setData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [currentPage, pageSize, searchQuery]
+  );
+
+  const debounceSearch = useCallback((query) => {
+    const debounceTimeout = setTimeout(() => {
+      fetchData(1, pageSize, query);
+    }, 300);
+    return () => clearTimeout(debounceTimeout);
+  }, [fetchData, pageSize]);
+
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    debounceSearch(value); 
   };
-  
+
   const handleDelete = async (userId) => {
     try {
       await axios.delete(
@@ -163,36 +177,23 @@ const Home = () => {
     }
   };
 
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
-
-  const handleSearch = () => {
-    setCurrentPage(1); 
-    fetchData(); 
-  };
-  
-
   useEffect(() => {
     fetchData();
-  }, [currentPage, pageSize]); 
-
+  }, [currentPage, pageSize, fetchData]);
+ 
   return (
     <div>
       <div className="search-input">
         <Typography className="font-semibold text-2xl">Users</Typography>
         <Input
-  prefix={<SearchOutlined />}
-  className="search-email"
-  type="search"
-  placeholder="Type to search by email..."
-  value={searchQuery}
-  onChange={handleSearchChange}
-  onPressEnter={handleSearch}
-  allowClear // Enable clear button
-/>
-
-       
+          prefix={<SearchOutlined />}
+          className="search-email"
+          type="search"
+          placeholder="Type to search by email..."
+          value={searchQuery}
+          onChange={handleSearchChange}
+          allowClear
+        />
       </div>
       <Table
         loading={loading}

@@ -96,7 +96,7 @@ const ProfitInput = () => {
       }
     } catch (error) {
       setCustomProfitRanges([]);
-      message.error("Error fetching profit data: " + error.message);
+      message.error("Error fetching profit data:" + error.message);
     } finally {
       setLoading(false);
     }
@@ -170,7 +170,7 @@ const ProfitInput = () => {
       dataIndex: "profit",
       key: "profit",
       width: "50%",
-      render: (text, record) => (
+      render: (text, record) => ( 
         <Input
           type="number"
           value={record.profit}

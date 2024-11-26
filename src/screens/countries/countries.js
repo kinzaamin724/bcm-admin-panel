@@ -30,7 +30,7 @@ function Countries() {
       setData({
         countries: response.data.countries,
         totalRecords: response.data.totalRecords,
-      });
+      }); 
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally { 
