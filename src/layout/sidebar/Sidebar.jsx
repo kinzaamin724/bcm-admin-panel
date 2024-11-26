@@ -16,7 +16,7 @@ const Sidebar = ({ collapsed }) => {
     <Sider trigger={null} collapsible collapsed={collapsed} width={240}>
       <div className="demo-logo-vertical" />
       <div
-        className={"flex, justify-center items-center  text-white mt-6 mb-5"}
+        className={"flex , justify-center items-center  text-white mt-6 mb-5"}
       >
         <img src={Logo} alt="" className="w-[50px] h-[80px]" />
       </div> 
@@ -25,11 +25,11 @@ const Sidebar = ({ collapsed }) => {
           <NavLink
             className={({ isActive }) => (isActive ? "active-link" : "")}
             to="/"
-          > 
+          >
             User Management
           </NavLink> 
         </Menu.Item>
-        <Menu.Item key="2" icon={<VideoCameraOutlined/>}>
+        <Menu.Item key="2" icon={<VideoCameraOutlined />}>
           <NavLink
             className={({ isActive }) => (isActive ? "active-link" : "")}
             to="/pricing"
@@ -37,7 +37,7 @@ const Sidebar = ({ collapsed }) => {
             Pricing Management
           </NavLink>
         </Menu.Item>
-        <Menu.Item key="3" icon={<UploadOutlined/>}>
+        <Menu.Item key="3" icon={<UploadOutlined />}>
           <NavLink
             className={({ isActive }) => (isActive ? "active-link" : "")}
             to="/subscription"
