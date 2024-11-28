@@ -6,7 +6,7 @@ export const SiteMap = {
 
   home: {
     title: "home",
-    path: "/",
+    path: "/home",
     element: (
       <CustomLayout>
         <LazyComponent path="home/home" />
@@ -65,19 +65,19 @@ export const SiteMap = {
     ),
     description: "Subscription Management",
   },
-  // packages: {
-  //   title: "pricing management",                          
-  //   path: "/packages",
-  //   element: (
-  //     <CustomLayout>
-  //       <LazyComponent path="packages/packages" />
-  //     </CustomLayout>
-  //   ),
-  //   description: "Pricing Management",
-  // },
+  role: {
+    title: "role management",                          
+    path: "/role",
+    element: (
+      <CustomLayout>
+        <LazyComponent path="role/role" />
+      </CustomLayout>
+    ),
+    description: "Role Management",
+  },
   login:{
     title: "login",
-    path: "/login",
+    path: "/",
     element: (
       
         <LoginPage/>

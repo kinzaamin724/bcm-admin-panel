@@ -8,13 +8,14 @@ import {
 } from "@ant-design/icons";
 import { BiWorld } from "react-icons/bi";
 import { NavLink } from "react-router-dom";
+import { RiAdminLine } from "react-icons/ri";
 
 const { Sider } = Layout;
 
 const Sidebar = ({ collapsed }) => {
   return (
     <Sider trigger={null} collapsible collapsed={collapsed} width={240}>
-      <div className="demo-logo-vertical" />
+      <div className="demo-logo-vertical"/>
       <div
         className={"flex , justify-center items-center  text-white mt-6 mb-5"}
       >
@@ -24,7 +25,7 @@ const Sidebar = ({ collapsed }) => {
         <Menu.Item key="1" icon={<UserOutlined />}>
           <NavLink
             className={({ isActive }) => (isActive ? "active-link" : "")}
-            to="/"
+            to="/home"
           >
             User Management
           </NavLink> 
@@ -51,6 +52,14 @@ const Sidebar = ({ collapsed }) => {
             to="/countries"
           >
             Countries Management
+          </NavLink>
+        </Menu.Item>
+        <Menu.Item key="5" icon={<RiAdminLine />}>
+          <NavLink
+            className={({ isActive }) => (isActive ? "active-link" : "")}
+            to="/role"
+          >
+            Role Management
           </NavLink>
         </Menu.Item>
       </Menu>

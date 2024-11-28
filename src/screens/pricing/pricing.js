@@ -105,6 +105,7 @@ const ProfitInput = () => {
   
   useEffect(() => {
     fetchProfitRanges();
+    // eslint-disable-next-line
   }, [selectedCountry]);
 
   const handleCountryChange = (value) => {

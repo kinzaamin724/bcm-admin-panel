@@ -1,34 +1,54 @@
 import React, { useState } from "react";
-import { Form, Input, Button, Alert } from "antd";
-import "antd/dist/reset.css"; // Ensure Ant Design styles are reset
-import "../style/login/login.scss"; // Optional, for custom styles
-import Title from "antd/es/skeleton/Title";
+import { Form, Input, Button, message } from "antd";
+import "antd/dist/reset.css"; 
+import "../style/login/login.scss"; 
 
 const LoginPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     setIsSubmitting(true);
     setError(null);
 
-    // Simulate login request
-    setTimeout(() => {
-      setIsSubmitting(false);
-      if (values.email === "admin@example.com" && values.password === "password123") {
-        alert("Login successful!");
+    try {
+      const response = await fetch(
+        "https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/loginAdmin",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }
+      );
+  
+      const data = await response.json();
+      console.log("API Response:", data);
+
+      if (response.ok && data.token) {
+      message.success("login successful")
+        localStorage.setItem("token", data.token); 
+        localStorage.setItem("_id", data?.user?._id); 
+        console.log("Token:", data.token);
+        window.location.href = "/home"; 
+    
       } else {
-        setError("Invalid email or password");
+        setError(data.message || "Login failed. Please try again.");
       }
-    }, 1000);
+    } catch (err) {
+      setError("An error occurred. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+  
 
   return (
     <div className="login-container">
-        
       <h2 className="login">Login</h2>
- 
-      {error && <Alert message={error} type="error" showIcon closable />}
+
+     
       <Form
         name="loginForm"
         layout="vertical"
@@ -53,7 +73,7 @@ const LoginPage = () => {
 
         <Form.Item>
           <Button
-          className="login-button"
+            className="login-button"
             type="primary"
             htmlType="submit"
             loading={isSubmitting}
