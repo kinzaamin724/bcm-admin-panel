@@ -20,13 +20,19 @@ const CustomHeader = ({ collapsed, toggle }) => {
     setIsMenuVisible(true);
   };
   const handleConfirm = () => {
-    message.success('Logged out successfully');
+  
     localStorage.removeItem('_id');
+  
+   
+    message.success('Logged out successfully');
+  
     setIsMenuVisible(false);
-
+  
     navigate('/');
-    console.log("Logged out successfully")
+  
+    console.log("Logged out successfully");
   };
+  
   const handleCancel = () => {
     setIsMenuVisible(false);
   };
