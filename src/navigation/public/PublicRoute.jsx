@@ -10,7 +10,7 @@ const PublicRoute = ({ children }) => {
   }, []);
 
   if (isAuthenticated === null) {
-    return null; // Show a loading spinner or nothing while checking
+    return null; 
   }
 
   return isAuthenticated ? <Navigate to="/home" /> : children;

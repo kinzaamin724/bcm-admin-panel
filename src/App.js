@@ -6,7 +6,7 @@ function App() {
   useEffect(() => {
 
     localStorage.removeItem("_id");
-    localStorage.removeItem("token"); // Also clear the token if used
+    localStorage.removeItem("token");
     
 
    
