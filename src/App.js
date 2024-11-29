@@ -1,17 +1,8 @@
-import React, { useEffect } from "react";
-import { RouterProvider } from "react-router-dom";
-import { router } from "./navigation/Router";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import SiteMap from "./navigation/SiteMap";  // Ensure correct import path
 
 function App() {
-  useEffect(() => {
-
-    localStorage.removeItem("_id");
-    localStorage.removeItem("token");
-    
-
-   
-
-  }, []);
+  const router = createBrowserRouter(SiteMap);  // Pass SiteMap directly
 
   return (
     <div>

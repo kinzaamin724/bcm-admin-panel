@@ -3,10 +3,12 @@ import LoginPage from "../screens/login";
 import LazyComponent from "./LazyComponent";
 import PrivateRoute from "./protected/PrivateRoute";
 
-
-export const SiteMap = {
-  home: {
-    title: "home",
+const SiteMap = [
+  {
+    path: "/",
+    element: <LoginPage />,
+  },
+  {
     path: "/home",
     element: (
       <PrivateRoute>
@@ -15,10 +17,8 @@ export const SiteMap = {
         </CustomLayout>
       </PrivateRoute>
     ),
-    description: "home-Page",
   },
-  businessProfile: {
-    title: "businessProfile",
+  {
     path: "/businessProfile",
     element: (
       <PrivateRoute>
@@ -27,10 +27,8 @@ export const SiteMap = {
         </CustomLayout>
       </PrivateRoute>
     ),
-    description: "businessProfile-Page",
   },
-  shop: {
-    title: "shop-pages",
+  {
     path: "/shop",
     element: (
       <PrivateRoute>
@@ -39,10 +37,8 @@ export const SiteMap = {
         </CustomLayout>
       </PrivateRoute>
     ),
-    description: "Shop-Page",
   },
-  countries: {
-    title: "country management",
+  {
     path: "/countries",
     element: (
       <PrivateRoute>
@@ -51,10 +47,8 @@ export const SiteMap = {
         </CustomLayout>
       </PrivateRoute>
     ),
-    description: "Countries Management",
   },
-  pricing: {
-    title: "pricing management",
+  {
     path: "/pricing",
     element: (
       <PrivateRoute>
@@ -63,10 +57,8 @@ export const SiteMap = {
         </CustomLayout>
       </PrivateRoute>
     ),
-    description: "Pricing Management",
   },
-  packages: {
-    title: "subscription management",
+  {
     path: "/subscription",
     element: (
       <PrivateRoute>
@@ -75,10 +67,8 @@ export const SiteMap = {
         </CustomLayout>
       </PrivateRoute>
     ),
-    description: "Subscription Management",
   },
-  role: {
-    title: "role management",
+  {
     path: "/role",
     element: (
       <PrivateRoute>
@@ -87,11 +77,7 @@ export const SiteMap = {
         </CustomLayout>
       </PrivateRoute>
     ),
-    description: "Role Management",
   },
-  login: {
-    title: "login",
-    path: "/",
-    element: <LoginPage />,
-  },
-};
+];
+
+export default SiteMap;
