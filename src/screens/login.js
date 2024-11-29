@@ -12,14 +12,15 @@ const LoginPage = () => {
 const [userId , setUserId] = useState("")
 
 
-const onFinish = async (values) => {
+const onFinish = async (email, password) => {
   setIsSubmitting(true);
   setError(null);
 
   try {
     const response = await axios.post(
       "https://zeta-bonfire-426108-u1.uc.r.appspot.com/admin/user/loginAdmin",
-      values,
+      email,
+       password,
       {
         headers: {
           "Content-Type": "application/json",

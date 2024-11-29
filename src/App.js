@@ -1,8 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import SiteMap from "./navigation/SiteMap";  // Ensure correct import path
+import { RouterProvider } from "react-router-dom";
+import { router } from "./navigation/Router";
 
 function App() {
-  const router = createBrowserRouter(SiteMap);  // Pass SiteMap directly
+
 
   return (
     <div>
