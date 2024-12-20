@@ -1,39 +1,63 @@
-
 .login-container {
-    max-width: 400px;
-    margin: 40px auto;
-    padding: 20px;
-    border: 1px solid #d9d9d9;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    min-height: 500px;
-    overflow: hidden;
-    
+  min-width: 600px;
+  margin: 40px auto;
+  border-radius: 8px;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.login {
+  font-size: 36px;
+  line-height: 36px;
+  margin: 0;
+  text-align: center;
+}
+.login-form {
+  .ant-form-item .ant-form-item-label > label {
+    font-size: 18px;
   }
-  
-  .login{
-    font-size: 36px;
-    font-weight: 500;
-    text-align: center;
-    margin-top: 20%;
-    margin-bottom: 20px;
+  // .ant-input {
+  //   padding: 10px;
+  // }
+  // .ant-input-affix-wrapper {
+  //   padding: 10px;
+  // }
+}
+.login-form .ant-form-item {
+  // margin-bottom: 16px;
+}
+.login-button {
+  padding: 20px;
+}
+.ant-input {
+  background-color: transparent !important; // Makes the background transparent
+  &:hover,
+  &:focus,
+  &:disabled {
+    background-color: transparent !important; // Ensures transparency on hover, focus, and disabled states
   }
-  .login-form{
-    margin-top: 20%;
- .ant-form-item .ant-form-item-label >label {
-    font-size: 18px;}
-    .ant-input {
-        padding: 10px;
-    }
-    .ant-input-affix-wrapper{
-        padding: 10px;
-    }
-  }
-  .login-form .ant-form-item {
-    margin-bottom: 16px;
-  }
-  .login-button{
-    padding: 20px;
-    margin-top: 20px;
-  }
+}
+
+/* Remove light blue background on focus, hover, and active states */
+// input {
+//   &:focus {
+//     background-color: transparent !important; /* Removes the background */
+//     outline: none; /* Removes default outline */
+//     box-shadow: none !important; /* Removes the default shadow */
+//   }
+
+//   &:hover {
+//     background-color: transparent !important; /* Keeps it consistent */
+//   }
+
+//   &:active {
+//     background-color: transparent !important;
+//   }
+// }
+
+// /* Additional focus styling to match design */
+// .ant-input:focus {
+//   border-color: black !important; /* Customize as per your design */
+//   outline-color: black !important;
+//   box-shadow: none !important;
+// }

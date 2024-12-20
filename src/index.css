@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+.ant-form-item-label > label {
+  font-size: 18px; /* Font size for label */
+  font-weight: 600; /* Font weight for label */
+  font-family: "Poppins", serif;
+}
+
+::placeholder {
+  font-size: 18px; /* Font size for label */
+  font-family: "Poppins", serif;
+  color: #15151580 !important;
+}
 
 /* 
 // html,
@@ -59,4 +70,3 @@
 //   font-family:  Roboto,  'sans-serif';
 //   padding:0px
 // } */
- 
