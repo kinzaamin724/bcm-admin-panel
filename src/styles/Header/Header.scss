@@ -1,0 +1,278 @@
+@import "../mixins/mixins.scss";
+@import "../variabels/variabels.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+.main-header {
+  //   height: 90px;
+
+  border-bottom: #bababa;
+  box-shadow: 13px 0px 4px 3px #0000001a;
+
+  // background-color: #FFFFFF;
+
+  // position: fixed;
+  box-shadow: 13px 0px 4px 3px rgba(0, 0, 0, 0.1019607843);
+  background-color: #ffffff;
+  z-index: 3;
+  // width: 80%;
+}
+.haeder-content {
+  display: flex;
+  padding: 1rem 3rem;
+  justify-content: space-between;
+  align-items: center;
+}
+.cursor-set {
+  cursor: pointer;
+}
+// .main-header {
+//   position: sticky;
+//   top: 0;
+//   z-index: 1000;
+
+//   // backdrop-filter: blur(10px);
+
+// }
+.search .ant-input-outlined {
+  background-color: #ffffff !important;
+}
+
+.search {
+  flex-grow: 1; /* Allow the search to take up available space */
+  max-width: 60%; /* Set max width to 60% */
+  border-radius: 15px;
+}
+.user-a {
+  padding: 8px 15px;
+  // @include cardslargetext();
+  // background-color: $buttonColor;
+  border-radius: 50%;
+}
+
+.search .ant-input-prefix {
+  color: #ed4b4b;
+  // font-size: $mediumtext;
+  padding-left: 0.5rem;
+}
+
+.search .custom-input {
+  color: white; /* Change text color to white */
+  border-radius: 15px;
+}
+.search .custom-input .ant-input {
+  // color: $darkGrey;
+  padding: 0.5rem;
+  //  border: $basicColor;
+  padding-left: 0.5rem; /* Adjust padding inside the input */
+}
+
+.search .custom-input .ant-input:focus {
+  // border: $basicColor;
+}
+
+.notify {
+  color: #ed4b4b;
+  //font-size: $xlargetext;
+  font-weight: 700;
+}
+.custom-input input::placeholder {
+  // color: $darkGrey;
+}
+.right-icons {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  align-items: center;
+}
+
+.menu-icon {
+  display: none; /* Hide by default */
+}
+.sidebar-modal .ant-modal-content {
+  padding: 0;
+}
+.sidebar-modal .ant-modal-body {
+  padding: 0;
+}
+
+:where(.css-1uq9j6g).ant-modal .ant-modal-close {
+  position: absolute;
+  top: 12px;
+  inset-inline-end: unset;
+  z-index: 1010;
+  padding: 0;
+  color: rgba(154, 24, 24, 0.45);
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  background: transparent;
+  border-radius: 4px;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  transition: color 0.2s, background-color 0.2s;
+}
+.ant-modal {
+  top: -10px;
+  left: 100px;
+}
+.ant-modal {
+  top: 0 !important;
+  left: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 100%;
+}
+.ant-modal-content {
+  border-radius: 0 !important;
+  height: 100%;
+}
+.ant-modal-body {
+  height: 100%;
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .menu-icon {
+    display: block;
+    margin-left: 1.5rem;
+  }
+  .main-header {
+    width: 100%;
+    left: 0;
+  }
+  .sidebar-layout {
+    display: none;
+  }
+  .main-header {
+    justify-content: space-between;
+  }
+}
+
+.header-modal .ant-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-modal .ant-modal-content {
+  background: #0653af;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  width: 700px;
+  height: 400px !important;
+  height: auto;
+  border-radius: 20px !important;
+  border: none !important;
+
+  // background: linear-gradient(127.09deg, rgba(6, 11, 40, 0.99) 19.41%, rgba(10, 14, 35, 0.9) 80.65%);
+}
+
+.header-modal .ant-modal-close {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  color: #a0aec0;
+}
+
+.header-modal .ant-modal-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-upload-head {
+  height: 300px;
+  width: 450px;
+
+  background: linear-gradient(180deg, #304181 0%, #304181 100%);
+
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column; /* Ensures children stack vertically */
+  align-items: center;
+  justify-content: flex-start; /* Aligns content to the top */
+  text-align: center;
+  position: relative; /* Allows for absolute positioning of modalHead */
+}
+
+.modalHead {
+  height: 50px;
+  width: 100%;
+  background-color: white;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  position: absolute;
+  top: -1px; /* Slight offset to prevent overlap with the border */
+  left: 0;
+  z-index: 10; /* Ensures modalHead stays on top */
+}
+.popupBody {
+  background-color: linear-gradient(180deg, #bababa 0%, #fefefe 100%);
+  color: #fefefe;
+  display: flex;
+  margin-top: 40px;
+  justify-content: space-between;
+  align-items: center;
+}
+.popbtns {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+.popupcon {
+  display: flex;
+  flex-direction: column;
+  text-align: start !important;
+  justify-content: space-between;
+}
+
+/* Resetting Popover Styles */
+.ant-popover {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.ant-popover-inner {
+  background: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+.ant-popover-arrow {
+  display: none !important; /* Hide the arrow */
+}
+.ant-input-outline:focus {
+  border: none !important;
+  // border: 1px solid #e5e7eb !important;
+}
+.ant-input-outlined:focus-within {
+  border: none !important;
+  // border: 1px solid #e5e7eb !important;
+}
+.ant-input-outlined:hover {
+  border: 1px solid #e5e7eb !important;
+}
+
+.user-a {
+  padding: 8px 15px;
+  // @include cardslargetext();
+  background-color: $redclr;
+  border-radius: 50%;
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 16px;
+}

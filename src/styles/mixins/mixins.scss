@@ -1,0 +1,75 @@
+@mixin heading($fontweight, $text-align) {
+  //color: #f5b116;
+  font-family: Poppins;
+  font-size: 2.25rem !important;
+  font-weight: $fontweight; //700;
+  line-height: 3.75rem;
+  text-align: $text-align;
+}
+@mixin logintext($fontweight) {
+  font-family: Poppins;
+  font-size: 1.125rem; //18px
+  font-weight: $fontweight; // 600;
+  line-height: 1.6875rem; //27px
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+@mixin tableHeading() {
+  font-family: Poppins;
+  font-size: 1rem;
+  // font-size: 20px;
+  font-weight: 500;
+  line-height: 30px;
+}
+@mixin dropDown() {
+  font-family: Poppins;
+  font-size: 0.7rem;
+  // font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+}
+@mixin tableData() {
+  font-family: Poppins;
+  font-size: 0.7rem;
+  // font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+}
+@mixin infoCardHeading() {
+  font-family: Poppins;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 48px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+@mixin infoCardText() {
+  font-family: Poppins;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 36px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+@mixin sidebarItems() {
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+@mixin activeNavItem() {
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 27px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}

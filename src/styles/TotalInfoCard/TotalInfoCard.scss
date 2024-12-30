@@ -1,0 +1,38 @@
+@import "../mixins/mixins.scss";
+@import "../variabels/variabels.scss";
+.total-info-card-container {
+  display: flex;
+  align-items: center;
+  // justify-content: center;
+  width: 402px; //25.125rem;
+  height: 138px;
+
+  border-radius: 20px;
+  background-color: rgba(232, 30, 30, 0.15);
+}
+.info-card-content {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  position: relative;
+  left: 20px;
+}
+.infoImg {
+  width: 90px;
+  height: 90px;
+  // border-radius: 50%;
+  // background-color: #e81e1e;
+}
+.info-card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  .heading {
+    @include infoCardHeading();
+    // color: $redclr;
+  }
+  .text {
+    @include infoCardText();
+    color: rgba(21, 21, 21, 0.5);
+  }
+}

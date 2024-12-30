@@ -1,0 +1,11 @@
+@import "../mixins/mixins.scss";
+@import "../variabels/variabels.scss";
+.users-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  //   align-items: center;
+}
+.heading-users {
+  @include heading(600, left);
+}

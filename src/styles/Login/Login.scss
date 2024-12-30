@@ -1,0 +1,142 @@
+@import "../mixins/mixins.scss";
+@import "../variabels/variabels.scss";
+
+.login-container {
+  height: 100vh !important;
+
+  width: 100% !important;
+  //padding-top: 2rem;
+  // padding-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+.login-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.heading-login {
+  @include heading(700, center);
+  // color: #f5b116;
+  // font-family: Poppins;
+  //font-size: 36px !important;
+
+  font-size: 2.25rem !important;
+  font-weight: 700;
+  line-height: 60px;
+  //text-align: center;
+}
+
+.primary-btn {
+  height: auto;
+  font-family: " Poppins";
+  background-color: rgba(
+    red(#e81e1e),
+    green(#e81e1e),
+    blue(#e81e1e),
+    1
+  ) !important;
+
+  color: $whiteclr;
+  font-family: Poppins;
+  font-size: 1.5rem; //24px;
+  font-weight: 600;
+  line-height: 2.25rem;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+
+  //@include button-style($buttonColor, #fff);
+  &:hover {
+    background-color: rgba(
+      red(#e81e1e),
+      green(#e81e1e),
+      blue(#e81e1e),
+      1
+    ) !important; // Adjust opacity as needed
+  }
+}
+.login-button {
+  margin-top: 1rem;
+}
+.form-items .input-item label {
+  @include logintext(600);
+  // margin-top: 3rem;
+  width: 400px;
+}
+.ant-form-item
+  .ant-form-item-label
+  > label.ant-form-item-required:not(
+    .ant-form-item-required-mark-optional
+  )::before {
+  display: none !important;
+  margin-inline-end: 4px;
+  color: #ff4d4f;
+  font-size: 14px;
+  font-family: SimSun, sans-serif;
+  line-height: 1;
+  content: "";
+}
+.form-items .form-admin-text {
+  //@include adminHeading();
+  font-family: Poppins;
+  font-size: 1.25rem !important;
+  // font-size: 20px !important;
+  // font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 42px;
+  text-align: center;
+
+  // color: $textColor;
+  //margin-top: 3rem;
+}
+.ant-input-login {
+  padding-left: 40px; // Adjust this value for space between the icon and text
+}
+
+.prefix-icon {
+  color: $redclr !important;
+  font-size: 1.25rem !important;
+  //font-size: 20px !important;
+  margin-right: 10px;
+}
+.ant-input-login {
+  padding: 10px;
+  border-radius: 12px;
+}
+.ant-input-outlined {
+  background-color: transparent;
+}
+.ant-input-outlined :hover {
+  background-color: transparent;
+}
+
+.form-items .ant-form-item .ant-form-item-label > label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  //color: $basicColor;
+  font-size: 0.8;
+  // font-size: 14px;
+  font-weight: 400;
+  line-height: 19.6px;
+}
+
+.input-item .ant-form-item .ant-form-item-explain-error {
+  margin-top: 0px !important;
+  color: #ff4d4f;
+}
+@media (max-width: 768px) {
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    height: auto; /* Allow height to adjust */
+  }
+}

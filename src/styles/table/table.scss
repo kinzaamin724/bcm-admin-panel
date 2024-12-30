@@ -1,0 +1,323 @@
+@import "../mixins/mixins.scss";
+@import "../variabels/variabels.scss";
+
+.table {
+  width: 100%;
+  max-width: 100%; // Ensure the table doesn't overflow the container
+  overflow-x: auto; // In case the content is wider, add scroll within the table itself
+
+  background-color: inherit;
+}
+
+.ant-table-wrapper .ant-table-thead > tr > th {
+  background-color: $buttonColor;
+  border-bottom: 1px solid $borderBottom;
+  color: $whiteColor;
+  @include tableHeading();
+  text-align: center;
+  border-inline-end: "none";
+}
+
+.ant-table-container > .ant-table-content > table > thead > tr > th {
+  border-inline-end: 0px !important;
+}
+.ant-table-content > table > tbody > tr > td {
+  border-inline-end: 0px !important;
+}
+.ant-table-wrapper .ant-table-column-sorter {
+  margin-inline-start: 4px;
+  color: rgba(0, 0, 0, 0.29);
+  font-size: 0;
+  display: none !important;
+  transition: color 0.3s;
+  display: none;
+}
+.ant-tooltip .ant-tooltip-arrow {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  pointer-events: none;
+  width: 16px;
+  height: 16px;
+  overflow: hidden;
+  display: none;
+}
+
+.ant-tooltip .ant-tooltip-inner {
+  display: none;
+  min-width: 28px;
+  min-height: 32px;
+  padding: 6px 8px;
+  color: #fff;
+  text-align: start;
+  text-decoration: none;
+  word-wrap: break-word;
+  background-color: rgba(0, 0, 0, 0.85);
+  border-radius: 6px;
+  box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08),
+    0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+}
+
+.ant-table-wrapper .ant-table-thead th.ant-table-column-sort {
+  // background: #f0f0f0;
+  background-color: $redclr;
+}
+.ant-table-wrapper .ant-table-thead th.ant-table-column-sort {
+  /* background: #f0f0f0; */
+  background-color: $redclr;
+}
+.ant-table-wrapper .ant-table-thead th.ant-table-column-sort :hover {
+  // background: #f0f0f0;
+  background-color: $redclr;
+}
+.ant-table-wrapper .ant-table-tbody > tr > td,
+:where(.css-1kf000u).ant-table-wrapper tfoot > tr > th,
+:where(.css-1kf000u).ant-table-wrapper tfoot > tr > td {
+  position: relative;
+  padding: 16px 16px;
+  overflow-wrap: break-word;
+  text-align: center;
+}
+.ant-table-tbody > tr > td:first-child {
+  border-left: 1px solid $borderBottom !important; /* Left border for the first body column */
+}
+.ant-table-row {
+  cursor: pointer;
+}
+
+.ant-table-tbody > tr > td:last-child {
+  border-right: 1px solid $borderBottom !important; /* Right border for the last body column */
+}
+.ant-table-wrapper .ant-table-thead th.ant-table-column-has-sorters:hover {
+  // background: #f0f0f0;
+  background-color: $redclr !important;
+}
+.cursor-sett {
+  cursor: pointer;
+  color: $primaryColor;
+  font-size: $mediumtext;
+  text-align: center;
+}
+.action-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.menu-item {
+  border-bottom: 1px solid $borderBottom !important;
+  color: $textColor !important;
+  border-radius: 0 !important;
+  @include dropDown();
+}
+.menu {
+  width: 100%;
+  max-width: 100px;
+  white-space: normal;
+  overflow-wrap: break-word; // Ensure long words break to the next line
+  word-wrap: break-word; //
+}
+
+.menu-item:last-child {
+  border-bottom: none !important; /* Remove bottom border for the last item */
+}
+.table .ant-table-thead > tr > th {
+  background-color: $buttonColor;
+  border-bottom: 1px solid $borderBottom;
+  color: $whiteColor;
+  @include tableHeading();
+}
+
+.table
+  .ant-table-wrapper
+  .ant-table-thead
+  > tr
+  > th:not(:last-child):not(.ant-table-selection-column):not(
+    .ant-table-row-expand-icon-cell
+  ):not([colspan])::before {
+  background-color: inherit;
+}
+.table
+  .ant-table-wrapper
+  .ant-table-thead
+  > tr
+  > td:not(:last-child):not(.ant-table-selection-column):not(
+    .ant-table-row-expand-icon-cell
+  ):not([colspan])::before {
+  background-color: inherit;
+}
+
+.table .ant-table-container table > thead > tr:first-child > *:first-child {
+  border-start-start-radius: 0 !important;
+}
+.table .ant-table-container table > thead > tr:first-child > *:last-child {
+  border-start-end-radius: 0 !important;
+}
+.table .ant-pagination-item-link {
+  color: #ffffff;
+}
+.table .ant-table-tbody > tr > td {
+  border-bottom: 1px solid $borderBottom !important; /* Adjust the alpha value to make it look thinner */
+  @include tableData();
+}
+
+.table .ant-table {
+  background: inherit;
+  color: $textColor;
+}
+.table .ant-pagination-item-active a {
+  color: black;
+  border: 1px solid black;
+  border-radius: 6px;
+}
+.table .ant-pagination-item-active {
+  font-weight: 600;
+  background-color: inherit;
+  border-color: #ffffff;
+}
+.table .ant-pagination .ant-pagination-item-active {
+  border-color: #ffffff;
+}
+.table .ant-table-tbody .ant-table-row > .ant-table-cell-row-hover {
+  background: $whiteColor;
+}
+.ant-table-wrapper .ant-table-pagination.ant-pagination {
+  margin: 16px 0;
+  display: none;
+}
+.cursor-sett {
+  cursor: pointer;
+  color: $primaryColor;
+  font-size: $mediumtext;
+  text-align: center;
+}
+.action-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.menu-item {
+  border-bottom: 1px solid $borderBottom !important;
+  color: $textColor !important;
+  border-radius: 0 !important;
+  @include dropDown();
+}
+.menu {
+  width: 100%;
+  max-width: 100px;
+  white-space: normal;
+  overflow-wrap: break-word; // Ensure long words break to the next line
+  word-wrap: break-word; //
+}
+
+.menu-item:last-child {
+  border-bottom: none !important; /* Remove bottom border for the last item */
+}
+.table .ant-table-thead > tr > th {
+  background-color: $buttonColor;
+  border-bottom: 1px solid $borderBottom;
+  color: $whiteColor;
+  @include tableHeading();
+}
+
+//  .table .ant-table-wrapper .ant-table-thead >tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before{
+//   background-color: inherit;
+//  }
+//  .table .ant-table-wrapper .ant-table-thead >tr>td:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before{
+//   background-color: inherit;
+//  }
+
+.table .ant-table-container table > thead > tr:first-child > *:first-child {
+  border-start-start-radius: 0 !important;
+}
+.table .ant-table-container table > thead > tr:first-child > *:last-child {
+  border-start-end-radius: 0 !important;
+}
+.table .ant-pagination-item-link {
+  color: #ffffff;
+}
+.table .ant-table-tbody > tr > td {
+  border-bottom: 1px solid $borderBottom !important; /* Adjust the alpha value to make it look thinner */
+  @include tableData();
+}
+
+.table .ant-table {
+  background: inherit;
+  color: $textColor;
+}
+.table .ant-pagination-item-active a {
+  color: black;
+  border: 1px solid black;
+  border-radius: 6px;
+}
+.table .ant-pagination-item-active {
+  font-weight: 600;
+  background-color: inherit;
+  border-color: #ffffff;
+}
+.table .ant-pagination .ant-pagination-item-active {
+  border-color: #ffffff;
+}
+.table .ant-table-tbody .ant-table-row > .ant-table-cell-row-hover {
+  background: $whiteColor;
+}
+
+.table
+  .ant-table.ant-table-bordered
+  > .ant-table-container
+  > .ant-table-summary
+  > table
+  > tfoot
+  > tr
+  > td {
+  border-inline-end: none;
+  border-inline-start: none;
+}
+.table
+  .ant-table-wrapper
+  .ant-table.ant-table-bordered
+  > .ant-table-container
+  > .ant-table-content
+  > table
+  > thead
+  > tr
+  > th {
+  border-inline-end: none;
+  border-inline-start: none;
+}
+.table
+  .ant-table-wrapper
+  .ant-table.ant-table-bordered
+  > .ant-table-container
+  > .ant-table-content
+  > table
+  > tbody
+  > tr
+  > td {
+  border-inline-end: none;
+  border-inline-start: none;
+}
+.table .ant-table-wrapper .ant-table.ant-table-bordered > .ant-table-container {
+  border-inline-start: none;
+  border-top: none;
+}
+.table .ant-pagination-item-active:hover a {
+  /* color: #ffffff; */
+  background-color: #ffffff;
+}
+.table .ant-pagination-item a:hover {
+  background-color: #ffffff;
+  border-radius: 8px;
+}
+.ant-modal-close-x:hover {
+  color: #a0aec0; /* Replace this with your desired color */
+}
+.deleteStyle {
+  color: $primaryColor;
+  cursor: "pointer";
+  margin-right: "10px";
+}

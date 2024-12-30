@@ -1,0 +1,229 @@
+@import "../mixins/mixins.scss";
+@import "../variabels/variabels.scss";
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+  width: 0;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollbar-none {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  margin-top: 2rem;
+  width: 60%;
+}
+.sidebar-item {
+  @include sidebarItems();
+  color: rgba(21, 21, 21, 1);
+}
+
+.sidebar-item.active,
+.sidebar-item:hover {
+  background-color: #fde9e9;
+  color: $redclr;
+  @include activeNavItem();
+
+  .nav-icon,
+  .custom-icon,
+  svg {
+    fill: #ed4b4b !important;
+    color: #ed4b4b !important;
+  }
+}
+
+.mynav {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  @include sidebarItems();
+  color: rgba(21, 21, 21, 1);
+}
+
+/* Customizing scrollbar for WebKit browsers */
+#sidebar::-webkit-scrollbar {
+  width: 0px !important;
+}
+.sideBarScroll::-webkit-scrollbar {
+  width: 0px !important;
+}
+.mynav .nav-item a {
+  display: flex;
+  // gap: 10px;
+  //gap: 0.2rem;
+  align-items: center;
+  margin-left: 10px;
+  @include sidebarItems();
+  color: rgba(21, 21, 21, 1);
+  // @include navLabel();
+  // width: 100%;
+  text-decoration: none;
+  border-radius: 10px;
+  // padding: 0.3rem 1rem;
+  // margin-left: 0.5rem;
+  // margin-right: 0.5rem;
+}
+
+.mynav .nav-item a:hover,
+.mynav .nav-item a.active {
+  color: white;
+
+  // @include navLabelActive();
+}
+
+.nav-item a:hover .nav-icon,
+.nav-item a.active-link .nav-icon {
+  color: #d0b2db; /* Icon color on hover and active state */
+}
+.mynav .nav-item a.active,
+.mynav .nav-item a.active-link {
+  margin-left: 5px;
+  background-color: #fde9e9; /* Background color on hover and active state */
+  color: $primaryColor; /* Icon color on hover and active state */
+  // @include navLabelActive();
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 27px;
+  // text-align: left;
+  // text-underline-position: from-font;
+  // text-decoration-skip-ink: none;
+}
+
+.mynav .nav-item a:hover,
+.mynav .nav-item a.active-link {
+  background-color: #fde9e9; /* Background color on hover and active state */
+  color: $primaryColor; /* Icon color on hover and active state */
+  //  @include navLabelActive();
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 27px;
+}
+
+.nav-icon {
+  border-radius: 10px;
+
+  font-size: $xlargetext !important;
+  color: $basicColor; /* Default icon color */
+  padding: 0.5rem; /* Adjust padding to fit the rectangle */
+  margin: 0.2rem; /* Adjust margin as needed */
+}
+
+.nav-item a.active-link .nav-icon {
+  color: $primaryColor; /* Icon color on hover and active state */
+}
+
+.nav-item a:hover .nav-icon {
+  color: $primaryColor; /* Icon color on hover and active state */
+}
+
+.nav-item a.active .nav-icon {
+  color: $primaryColor; /* Icon color on hover and active state */
+}
+
+@media (max-width: 768px) {
+  #sidebar {
+    width: 200px;
+  }
+
+  .menu-icon {
+    display: block !important;
+  }
+}
+
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  display: flex;
+}
+.admin-nav-item span:hover .nav-icon {
+  color: $primaryColor !important; /* Icon color on hover and active state */
+}
+
+.admin-nav-item {
+  display: flex !important;
+  gap: 10px;
+  margin-left: 4px;
+  align-items: center;
+  gap: 2px;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 1rem;
+  // font-size: 16px;
+  line-height: 24px;
+  font-family: Poppins;
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+  color: inherit;
+  background-color: transparent;
+
+  /* Hover effect for both text and icon */
+  &:hover {
+    color: $primaryColor; /* Change text color on hover */
+    background-color: #fde9e9; /* Change background color on hover */
+    font-weight: 700;
+    font-size: 1.125rem;
+    // font-size: 18px;
+    line-height: 27px;
+    border-radius: 10px;
+
+    /* Ensure icon color changes on hover of the tab */
+    .nav-icon,
+    .custom-icon {
+      color: $primaryColor; /* Change icon color on hover */
+    }
+  }
+}
+
+.nav-icon {
+  border-radius: 10px;
+  font-size: $xlargetext !important;
+  color: $basicColor; /* Default icon color */
+  padding: 0.5rem;
+  margin: 0.2rem;
+}
+
+/* Active state styles */
+.admin-nav-active {
+  border-radius: 10px;
+  padding: 5px;
+  font-weight: 700;
+  font-size: 1.125rem;
+  //font-size: 18px;
+  line-height: 27px;
+  color: $primaryColor; /* Active text color */
+  background-color: #fde9e9;
+
+  .nav-icon,
+  .custom-icon {
+    color: $primaryColor; /* Active icon color */
+  }
+}
+
+.dropdown-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 15px;
+  font-size: 0.7rem;
+  // font-size: 14px;
+  line-height: 21px;
+  font-family: Poppins;
+}
